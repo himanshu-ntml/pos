@@ -24,13 +24,17 @@ import { OrderWithItems } from "../../../../server/src/models/order";
 import TableDetails from "./TableDetails";
 import TableButton from "./TableButton";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { TableProps } from "@/types";
 import ActionButtons from "../orders/ActionButtons";
 import EmptyTable from "./EmptyTable";
 import { summarizePrice } from "@/lib/utils";
 import { format } from "date-fns";
+import { TableWithReservation } from "../../../../server/src/schemas";
 
-export default function TableDialog({ tableData }: { tableData: TableProps }) {
+export default function TableDialog({
+  tableData,
+}: {
+  tableData: TableWithReservation;
+}) {
   const isDesktop = useMediaQuery();
   const { data: orderData, isError } = useQuery<OrderWithItems>({
     queryKey: ["table", tableData.id],
@@ -39,7 +43,9 @@ export default function TableDialog({ tableData }: { tableData: TableProps }) {
 
   if (isError) return <Error message="wan't able to fetch table data" />;
 
-  const totalAmount = Number(orderData?.orderItems && summarizePrice(orderData.orderItems)?.toFixed(2));
+  const totalAmount = Number(
+    orderData?.orderItems && summarizePrice(orderData.orderItems)?.toFixed(2)
+  );
   if (!tableData) return null;
   if (isDesktop) {
     return (
@@ -49,7 +55,9 @@ export default function TableDialog({ tableData }: { tableData: TableProps }) {
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="flex justify-between">Table #{tableData.number}</DialogTitle>
+            <DialogTitle className="flex justify-between">
+              Table #{tableData.number}
+            </DialogTitle>
             {orderData?.userId && (
               <DialogDescription className="flex justify-between">
                 <span>
@@ -62,7 +70,11 @@ export default function TableDialog({ tableData }: { tableData: TableProps }) {
           {tableData.status === "occupied" ? (
             orderData && <TableDetails data={orderData} />
           ) : (
-            <EmptyTable tableId={tableData.id} tableNumber={tableData.number} clean={!tableData.requireCleaning} />
+            <EmptyTable
+              tableId={tableData.id}
+              tableNumber={tableData.number}
+              clean={!tableData.requireCleaning}
+            />
           )}
 
           <DialogFooter className="flex justify-between">
@@ -89,7 +101,11 @@ export default function TableDialog({ tableData }: { tableData: TableProps }) {
         {tableData.status === "occupied" ? (
           orderData && <TableDetails data={orderData} />
         ) : (
-          <EmptyTable tableId={tableData.id} clean={!tableData.requireCleaning} tableNumber={tableData.number} />
+          <EmptyTable
+            tableId={tableData.id}
+            clean={!tableData.requireCleaning}
+            tableNumber={tableData.number}
+          />
         )}
         <DrawerFooter>
           {orderData?.id && (

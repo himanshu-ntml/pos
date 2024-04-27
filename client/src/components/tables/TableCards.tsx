@@ -5,13 +5,15 @@ import { getAll } from "@/api/tables";
 import Loading from "../layout/Loading";
 import Error from "../layout/Error";
 import TablesDialog from "./TablesDialog";
-import { TableProps } from "@/types";
 import { cn } from "@/lib/utils";
 import AddReservation from "../reservations/addReservation/AddReservation";
 // import { AdminMenu } from "./AdminMenu";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import { useState } from "react";
-import { TableStatus } from "../../../../server/src/schemas/table";
+import type {
+  TableStatus,
+  TableWithReservation,
+} from "../../../../server/src/schemas/table";
 import { getUnassignedReservations } from "@/api/reservation";
 
 type TabelsGridProps = {
@@ -20,7 +22,7 @@ type TabelsGridProps = {
 
 export default function TableCards({ standalone }: TabelsGridProps) {
   const [tabStatus, setTabStatus] = useState<TableStatus>();
-  const { data, isLoading, isError } = useQuery<TableProps[]>({
+  const { data, isLoading, isError } = useQuery<TableWithReservation[]>({
     queryKey: ["tables", tabStatus],
     queryFn: () => getAll(tabStatus),
   });
@@ -44,7 +46,10 @@ export default function TableCards({ standalone }: TabelsGridProps) {
         <ToggleGroupItem value="occupied"> Occupied</ToggleGroupItem>
         <ToggleGroupItem value="reserved"> Reserved</ToggleGroupItem>
       </ToggleGroup>
-      {!!reservations?.length && reservations.map((reservation) => <p key={reservation.id}>{reservation.expireAt}</p>)}
+      {!!reservations?.length &&
+        reservations.map((reservation) => (
+          <p key={reservation.id}>{reservation.expireAt}</p>
+        ))}
       <CardHeader className="flex md:flex-row items-center justify-between flex-col">
         <CardTitle className="text-xl font-semibold">Tables</CardTitle>
         <div className="flex gap-3">
@@ -56,16 +61,22 @@ export default function TableCards({ standalone }: TabelsGridProps) {
       <CardContent>
         {data && data?.length > 0 ? (
           <div
-            className={cn("grid grid-flow-row gap-3 grid-cols-1 sm:grid-cols-2", {
-              "gird-flow-col justify-center xl:grid-cols-4  md:grid-cols-3": standalone,
-            })}
+            className={cn(
+              "grid grid-flow-row gap-3 grid-cols-1 sm:grid-cols-2",
+              {
+                "gird-flow-col justify-center xl:grid-cols-4  md:grid-cols-3":
+                  standalone,
+              }
+            )}
           >
-            {data.map((table: TableProps) => (
+            {data.map((table) => (
               <TablesDialog key={table.id} tableData={table} />
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-600 font-sans my-10">No tables found</p>
+          <p className="text-center text-gray-600 font-sans my-10">
+            No tables found
+          </p>
         )}
       </CardContent>
     </Card>

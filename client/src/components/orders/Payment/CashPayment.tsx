@@ -4,11 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Delete } from "lucide-react";
 import { useState } from "react";
 import usePayments from "@/hooks/usePayments";
-import { PaymentProps } from "@/types";
 import Dialer from "./Dialer";
 
-export default function CashPayment({ paymentAmout = 100 }: PaymentProps) {
+export default function CashPayment() {
   const [inputValue, setInputValue] = useState<string>("");
+  const paymentAmout = 100;
 
   const { makePayment } = usePayments();
 
@@ -51,10 +51,20 @@ export default function CashPayment({ paymentAmout = 100 }: PaymentProps) {
         <Dialer value={paymentAmout} setValue={setInputValue} />
       </CardContent>
       <CardFooter className="flex justify-center space-x-2">
-        <Button onClick={() => setInputValue("")} variant="outline" className="w-full">
+        <Button
+          onClick={() => setInputValue("")}
+          variant="outline"
+          className="w-full"
+        >
           Clear
         </Button>
-        <Button onClick={handlePayment} variant="outline" size="lg" color="secondary" className="w-full">
+        <Button
+          onClick={handlePayment}
+          variant="outline"
+          size="lg"
+          color="secondary"
+          className="w-full"
+        >
           Pay
         </Button>
       </CardFooter>
