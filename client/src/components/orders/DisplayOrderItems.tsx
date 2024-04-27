@@ -1,4 +1,3 @@
-import { Item } from "types";
 import {
   TableHead,
   TableRow,
@@ -10,13 +9,17 @@ import {
 } from "@/components/ui/table";
 import { formatCurrency } from "@/lib/utils";
 import { Bill } from "../../../../server/src/schemas";
+import { Item } from "@/types";
 
 type DisplayOrderItemsProps = {
   items: Item[];
   bill?: Bill | null;
 };
 
-export default function DisplayOrderItems({ items, bill }: DisplayOrderItemsProps) {
+export default function DisplayOrderItems({
+  items,
+  bill,
+}: DisplayOrderItemsProps) {
   const subTotal = items?.reduce((acc, item) => {
     return acc + Number(item.items.price) * item.quantity;
   }, 0);
@@ -39,7 +42,9 @@ export default function DisplayOrderItems({ items, bill }: DisplayOrderItemsProp
             <TableCell className="text-center">{item.quantity}</TableCell>
             {item.items?.price && (
               <TableCell colSpan={2} className="text-right">
-                {formatCurrency((Number(item.items.price) * item.quantity).toFixed(2))}
+                {formatCurrency(
+                  (Number(item.items.price) * item.quantity).toFixed(2)
+                )}
               </TableCell>
             )}
           </TableRow>
@@ -50,7 +55,9 @@ export default function DisplayOrderItems({ items, bill }: DisplayOrderItemsProp
         {!!subTotal && (
           <TableRow>
             <TableCell colSpan={3}>Sub Total</TableCell>
-            <TableCell className="text-right">{formatCurrency(subTotal.toFixed(2))}</TableCell>
+            <TableCell className="text-right">
+              {formatCurrency(subTotal.toFixed(2))}
+            </TableCell>
           </TableRow>
         )}
         {bill && bill.paid && (
@@ -58,7 +65,9 @@ export default function DisplayOrderItems({ items, bill }: DisplayOrderItemsProp
             <TableCell colSpan={3} className="font-bold">
               Paid
             </TableCell>
-            <TableCell className="text-right">{formatCurrency(bill.totalAmount)}</TableCell>
+            <TableCell className="text-right">
+              {formatCurrency(bill.totalAmount)}
+            </TableCell>
           </TableRow>
         )}
       </TableFooter>

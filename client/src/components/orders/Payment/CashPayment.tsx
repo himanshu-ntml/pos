@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Delete } from "lucide-react";
 import { useState } from "react";
 import usePayments from "@/hooks/usePayments";
-import { PaymentProps } from "types";
+import { PaymentProps } from "@/types";
 import Dialer from "./Dialer";
 
 export default function CashPayment({ paymentAmout = 100 }: PaymentProps) {

@@ -52,5 +52,6 @@ export const newItemSchema = newItemSchemaRaw.extend({
   categoryId: z.number({ invalid_type_error: "Required" }).min(0),
   price: z.coerce.string().min(1, { message: "Required" }),
 });
+export type NewItemSchemaType = z.infer<typeof newItemSchema>;
 export type Item = typeof items.$inferSelect;
 export type NewItem = typeof items.$inferInsert;

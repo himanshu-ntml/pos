@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { Item as OrderItem } from "types";
-// import { OrderItem } from "types";
+import { Item as OrderItem } from "@/types";
 
 import { Item } from "../../../server/src/schemas";
 

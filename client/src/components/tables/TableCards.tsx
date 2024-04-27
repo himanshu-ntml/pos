@@ -5,7 +5,7 @@ import { getAll } from "@/api/tables";
 import Loading from "../layout/Loading";
 import Error from "../layout/Error";
 import TablesDialog from "./TablesDialog";
-import { TableProps } from "types";
+import { TableProps } from "@/types";
 import { cn } from "@/lib/utils";
 import AddReservation from "../reservations/addReservation/AddReservation";
 // import { AdminMenu } from "./AdminMenu";

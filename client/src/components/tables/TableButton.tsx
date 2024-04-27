@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { cn } from "@/lib/utils";
 import { Notebook } from "lucide-react";
-import { TableProps } from "types";
+import { TableProps } from "@/types";
 
 type TableButtonProps = {
   tableData: TableProps;
