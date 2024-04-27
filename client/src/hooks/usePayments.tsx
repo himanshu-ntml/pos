@@ -2,7 +2,7 @@ import { generateBill } from "@/api/bills";
 import { pay } from "@/api/payment";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { NewPayment } from "../../../server/src/schemas";
+import { NewPayment } from "@server/src/schemas";
 
 export default function usePayments() {
   const { toast } = useToast();

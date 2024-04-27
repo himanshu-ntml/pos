@@ -6,10 +6,10 @@ import { useState } from "react";
 import usePayments from "@/hooks/usePayments";
 import Dialer from "./Dialer";
 
+
 export default function CashPayment() {
   const [inputValue, setInputValue] = useState<string>("");
-  const paymentAmout = 100;
-
+  const paymentAmount = 100; // for test
   const { makePayment } = usePayments();
 
   const handlePayment = () => {
@@ -32,7 +32,7 @@ export default function CashPayment() {
             type="number"
             className="w-full"
             autoComplete="off"
-            disabled={Number(inputValue) > paymentAmout}
+            disabled={Number(inputValue) > paymentAmount}
             autoCorrect="off"
             autoCapitalize="off"
             spellCheck="false"
@@ -48,7 +48,7 @@ export default function CashPayment() {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex justify-center">
-        <Dialer value={paymentAmout} setValue={setInputValue} />
+        <Dialer value={paymentAmount} setValue={setInputValue} />
       </CardContent>
       <CardFooter className="flex justify-center space-x-2">
         <Button

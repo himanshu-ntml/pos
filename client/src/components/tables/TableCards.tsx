@@ -13,7 +13,7 @@ import { useState } from "react";
 import type {
   TableStatus,
   TableWithReservation,
-} from "../../../../server/src/schemas/table";
+} from "@server/src/schemas/table";
 import { getUnassignedReservations } from "@/api/reservation";
 
 type TabelsGridProps = {

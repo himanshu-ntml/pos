@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Order } from "../../../../server/src/schemas";
+import { Order } from "@server/src/schemas";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 import { formatCurrency } from "@/lib/utils";

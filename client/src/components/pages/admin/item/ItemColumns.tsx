@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Item } from "../../../../../../server/src/schemas/item";
+import { Item } from "@server/src/schemas/item";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { CaretSortIcon, CheckIcon, Cross2Icon } from "@radix-ui/react-icons";

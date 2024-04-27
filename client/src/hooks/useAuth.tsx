@@ -1,6 +1,6 @@
 import { useToast } from "@/components/ui/use-toast";
 import { useState, useEffect } from "react";
-import { decrypt } from "../../../server/src/utils";
+import { decrypt } from "@server/src/utils";
 import { login as signUp } from "@/api/auth";
 
 

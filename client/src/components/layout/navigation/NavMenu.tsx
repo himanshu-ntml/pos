@@ -3,7 +3,7 @@ import { TriangleDownIcon } from "@radix-ui/react-icons";
 
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { NavigationMenuList, NavigationMenu } from "@/components/ui/navigation-menu";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import navMenuItems from "./navItems";
 
 export default function NavMenu() {

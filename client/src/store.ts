@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { type Item } from "../../server/src/schemas/item";
+import { type Item } from "@server/src/schemas/item";
 
 type SelectedTable = {
   number?: number;

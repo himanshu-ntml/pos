@@ -5,7 +5,7 @@ import {
   AlertDialogFooter,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import { Banknote, CreditCard } from "lucide-react";
 import { useState } from "react";
 import CashPayment from "./CashPayment";
@@ -13,7 +13,7 @@ import TipsButton from "./TipsButton";
 import usePayments from "@/hooks/usePayments";
 import { useQuery } from "@tanstack/react-query";
 import { getOneByOrderId } from "@/api/bills";
-import { BillWithPayments } from "../../../../../server/src/schemas";
+import { BillWithPayments } from "@server/src/schemas";
 import PaymentsList from "./PaymentsList";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -62,18 +62,30 @@ export default function PaymentButton({ orderId }: PaymentButtonProps) {
       <AlertDialogContent>
         <h1 className="font-semibold">Choose Payment method</h1>
         {state && (
-          <Button onClick={() => setState(null)} className="absolute top-5 right-5" variant="outline">
+          <Button
+            onClick={() => setState(null)}
+            className="absolute top-5 right-5"
+            variant="outline"
+          >
             Back
           </Button>
         )}
 
         {!state && (
           <div className="flex justify-evenly">
-            <Button onClick={() => handlePayment("Card")} className="size-24 flex flex-col gap-2" variant="outline">
+            <Button
+              onClick={() => handlePayment("Card")}
+              className="size-24 flex flex-col gap-2"
+              variant="outline"
+            >
               <CreditCard />
               Card
             </Button>
-            <Button onClick={() => handlePayment("Cash")} className="size-24 flex flex-col gap-2" variant="outline">
+            <Button
+              onClick={() => handlePayment("Cash")}
+              className="size-24 flex flex-col gap-2"
+              variant="outline"
+            >
               <Banknote />
               Cash
             </Button>
@@ -81,8 +93,12 @@ export default function PaymentButton({ orderId }: PaymentButtonProps) {
         )}
         <ScrollArea className="max-h-[300px] rounded-md w-full">
           <div className="flex md:flex-row flex-col gap-5">
-            {state === "cash" && <CashPayment orderId={orderId} onCancel={() => setState(null)} />}
-            <PaymentsList payments={bills?.payments} total={bills?.totalAmount} tipsAmount={tipsAmount} />
+            {state === "cash" && <CashPayment />}
+            <PaymentsList
+              payments={bills?.payments}
+              total={bills?.totalAmount}
+              tipsAmount={tipsAmount}
+            />
           </div>
         </ScrollArea>
         <AlertDialogFooter>

@@ -1,8 +1,11 @@
-import { NewUser } from "../../../server/src/schemas";
+import { NewUser } from "@server/src/schemas";
 
 const BASE_URL = import.meta.env.VITE_API_URL + "/auth";
 
-export const login = async ({ email, password }: Pick<NewUser, "email" | "password">) => {
+export const login = async ({
+  email,
+  password,
+}: Pick<NewUser, "email" | "password">) => {
   try {
     const res = await fetch(`${BASE_URL}/login`, {
       method: "POST",

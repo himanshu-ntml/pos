@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import Model from "../models/category";
-import { newCategoriesSchema } from "../../../server/src/schemas";
+import { newCategoriesSchema } from "../schemas";
 
 const router = Router();
 

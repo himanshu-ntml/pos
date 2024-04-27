@@ -16,18 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  // type Item,
-  // type NewItem,
-  type Category,
-} from "../../../../../../../server/src/schemas";
+import { type Category } from "@server/src/schemas";
 import { UseFormReturn } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import { getAll } from "@/api/categories";
-// import Loading from "@/components/layout/Loading";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
-// import Error from "@/components/layout/Error";
 import UploadFile from "./UploadFile";
 
 type ItemFieldsProps = {

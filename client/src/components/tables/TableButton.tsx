@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { cn } from "@/lib/utils";
 import { Notebook } from "lucide-react";
-import { TableWithReservation } from "../../../../server/src/schemas";
+import { TableWithReservation } from "@server/src/schemas";
 
 type TableButtonProps = {
   tableData: TableWithReservation;

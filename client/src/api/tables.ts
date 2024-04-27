@@ -1,5 +1,5 @@
 const BASE_URL = import.meta.env.VITE_API_URL + "/table";
-import { NewTable, TableStatus } from "../../../server/src/schemas";
+import { NewTable, TableStatus } from "@server/src/schemas";
 
 export const getAll = async (status?: TableStatus) => {
   const URL = `${BASE_URL}` + (status ? `?status=${status}` : "");

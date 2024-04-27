@@ -1,5 +1,9 @@
 import { create } from "zustand";
-import { StoreRegularSchedule, StoreSettings, Table } from "../../../server/src/schemas";
+import {
+  StoreRegularSchedule,
+  StoreSettings,
+  Table,
+} from "@server/src/schemas";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

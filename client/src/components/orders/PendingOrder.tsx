@@ -1,6 +1,6 @@
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card";
 
-import { OrderWithItems } from "../../../../server/src/models/order";
+import { OrderWithItems } from "@server/src/models/order";
 
 import DisplayOrderItems from "./DisplayOrderItems";
 import { formatCurrency, summarizePrice } from "@/lib/utils";

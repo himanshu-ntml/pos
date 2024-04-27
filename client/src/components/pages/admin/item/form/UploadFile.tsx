@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
-import { type Item } from "../../../../../../../server/src/schemas";
+import { type Item } from "@server/src/schemas";
 import { useEffect, useState } from "react";
 
 import { TrashIcon } from "@radix-ui/react-icons";

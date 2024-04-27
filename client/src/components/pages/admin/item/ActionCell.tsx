@@ -1,4 +1,4 @@
-import { Item } from "../../../../../../server/src/schemas/item";
+import { Item } from "@server/src/schemas/item";
 import { CellContext } from "@tanstack/react-table";
 import {
   DropdownMenu,
@@ -25,7 +25,7 @@ export default function ActionCell(props: CellContext<Item, unknown>) {
         title: "Success",
         description: "Item deleted successfully",
       });
-      queryClient.invalidateQueries({queryKey: ["items"]});
+      queryClient.invalidateQueries({ queryKey: ["items"] });
     },
     onError: (error) => {
       console.error("Action Cell", error);
@@ -54,7 +54,10 @@ export default function ActionCell(props: CellContext<Item, unknown>) {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem>View item</DropdownMenuItem>
           <DropdownMenuItem>View ingredients</DropdownMenuItem>
-          <DropdownMenuItem className="text-yellow-500 " onClick={() => navigate(`/admin/items/edit?id=${rowId}`)}>
+          <DropdownMenuItem
+            className="text-yellow-500 "
+            onClick={() => navigate(`/admin/items/edit?id=${rowId}`)}
+          >
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem className="text-red-500 " onClick={handleDelete}>

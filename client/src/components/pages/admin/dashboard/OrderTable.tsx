@@ -17,7 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/layout/Loading";
 import Error from "@/components/layout/Error";
 import { recentOrders } from "@/api/orders";
-import type { OrderWithUserAndBill } from "../../../../../../server/src/schemas";
+import type { OrderWithUserAndBill } from "@server/src/schemas";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "@/lib/utils";

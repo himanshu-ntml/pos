@@ -4,7 +4,7 @@ import AddItem from "./AddItem";
 import { Button } from "../ui/button";
 import { complete, serve, leave } from "@/api/orders";
 import { useToast } from "../ui/use-toast";
-import { OrderStatus } from "../../../../server/src/schemas";
+import { OrderStatus } from "@server/src/schemas";
 import PaymentButton from "./Payment/PaymentButton";
 
 type ActionButtonsProps = {

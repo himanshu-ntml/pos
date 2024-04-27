@@ -1,5 +1,5 @@
 import { DataTable } from "@/components/Data-table";
-import { Card } from "../../ui/card";
+import { Card } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { getOrderItems } from "@/api/orders";
 import Loading from "@/components/layout/Loading";

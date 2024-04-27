@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAll } from "@/api/tables";
 import Loading from "@/components/layout/Loading";
 import Error from "@/components/layout/Error";
-import { Table, TableStatus } from "../../../../../server/src/schemas/table";
+import { Table, TableStatus } from "@server/src/schemas/table";
 import { useStore } from "@/store";
 import { Button } from "@/components/ui/button";
 import { BrushIcon, Check } from "lucide-react";

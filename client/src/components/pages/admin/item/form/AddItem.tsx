@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  type NewItem,
-  newItemSchema,
-} from "../../../../../../../server/src/schemas/item";
+import { type NewItem, newItemSchema } from "@server/src/schemas/item";
 
 import { ItemFields } from "./ItemFields";
 import { Form } from "@/components/ui/form";

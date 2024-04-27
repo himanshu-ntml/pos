@@ -6,8 +6,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import MenuItem from "./MenuItem";
-import { type Category } from "../../../../server/src/schemas/category";
-import { type Item } from "../../../../server/src/schemas/item";
+import { type Category } from "@server/src/schemas/category";
+import { type Item } from "@server/src/schemas/item";
 import { getAll as getAllCategories } from "@/api/categories";
 import { getAll as getAllItems } from "@/api/items";
 import Loading from "../layout/Loading";

@@ -1,4 +1,4 @@
-import { type NewBill, type Bill } from "../../../server/src/schemas/bill";
+import { type NewBill, type Bill } from "@server/src/schemas/bill";
 
 const BASE_URL = import.meta.env.VITE_API_URL + "/bill";
 
@@ -42,7 +42,10 @@ export const update = async (data: Bill) => {
   return await res.json();
 };
 
-export const generateBill = async (orderId: number, tipsAmount: string | null) => {
+export const generateBill = async (
+  orderId: number,
+  tipsAmount: string | null
+) => {
   const res = await fetch(`${BASE_URL}/generate/${orderId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json;charset=utf-8" },

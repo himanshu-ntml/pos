@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { Item as OrderItem } from "@/types";
 
-import { Item } from "../../../server/src/schemas";
+import { Item } from "@server/src/schemas";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

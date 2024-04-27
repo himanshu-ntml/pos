@@ -1,6 +1,6 @@
 import $api from ".";
-import { OrderItem } from "../../../server/src/schemas";
-import { type NewItem } from "../../../server/src/schemas/item";
+import { OrderItem } from "@server/src/schemas";
+import { type NewItem } from "@server/src/schemas/item";
 
 const BASE_URL = import.meta.env.VITE_API_URL + "/item";
 

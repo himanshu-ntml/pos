@@ -1,10 +1,10 @@
-import { OrderWithItems } from "../../../server/src/models/order";
+import { OrderWithItems } from "@server/src/models/order";
 import type {
   OrderStatus,
   NewOrderWithItems,
   OrderItem,
   OrderItemsWithOrderAndItems,
-} from "../../../server/src/schemas/order";
+} from "@server/src/schemas/order";
 
 const BASE_URL = import.meta.env.VITE_API_URL + "/order";
 
@@ -17,7 +17,9 @@ export const getPending = async (): Promise<OrderWithItems[]> => {
   const res = await fetch(`${BASE_URL}/pending`);
   return await res.json();
 };
-export const getOrderItems = async (): Promise<OrderItemsWithOrderAndItems[]> => {
+export const getOrderItems = async (): Promise<
+  OrderItemsWithOrderAndItems[]
+> => {
   const res = await fetch(`${BASE_URL}/orderItems`);
   return await res.json();
 };
@@ -48,7 +50,6 @@ export const create = async (data: NewOrderWithItems) => {
   return await res.json();
 };
 
-
 export const serve = async (id: number) => {
   const res = await fetch(`${BASE_URL}/serve/${id}`, {
     method: "POST",
@@ -77,7 +78,13 @@ export const addSpecailRequest = async (orderId: number) => {
   });
   return await res.json();
 };
-export const addMoreItems = async ({ id, data }: { id: number; data: OrderItem[] }) => {
+export const addMoreItems = async ({
+  id,
+  data,
+}: {
+  id: number;
+  data: OrderItem[];
+}) => {
   const res = await fetch(`${BASE_URL}/addMore/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json;charset=utf-8" },

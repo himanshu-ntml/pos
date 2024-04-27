@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Payment } from "../../../../../server/src/schemas";
+import { Payment } from "@server/src/schemas";
 import { formatCurrency } from "@/lib/utils";
 
 type PaymentsListProps = {

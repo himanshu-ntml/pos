@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import { NewReservation } from "../../../../../../server/src/schemas";
+import { NewReservation } from "@server/src/schemas";
 import { UseFormReturn } from "react-hook-form";
 
 type StageButtonsProps = {

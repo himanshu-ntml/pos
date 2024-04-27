@@ -1,5 +1,5 @@
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table, TableFooter } from "@/components/ui/table";
-import { Item } from "../../../../../../server/src/schemas/item";
+import { Item } from "@server/src/schemas/item";
 import { useVenueSettings } from "@/hooks/useVenueSettings";
 import { formatCurrency } from "@/lib/utils";
 

@@ -1,7 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import * as PaymentModel from "../models/payment";
-import * as OrderModel from "../models/order";
-import { newPaymentSchema } from "../../../server/src/schemas";
+import { newPaymentSchema } from "../schemas";
 
 const router = Router();
 

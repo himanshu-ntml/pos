@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import * as Model from "../models/bill";
-import { billSchema, newBillSchema } from "../../../server/src/schemas";
+import { billSchema, newBillSchema } from "../schemas";
 
 const router = Router();
 

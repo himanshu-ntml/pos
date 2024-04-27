@@ -6,7 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { create } from "@/api/tables";
-import { NewTable, insertTableSchema } from "../../../../server/src/schemas";
+import { NewTable, insertTableSchema } from "@server/src/schemas";
 import { Textarea } from "@/components/ui/textarea";
 
 type AddTableFormProps = {

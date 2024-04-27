@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { type Item } from "../../../../../../server/src/schemas/item";
+import { type Item } from "@server/src/schemas/item";
 
 import { DataTable } from "@/components/Data-table";
 import Loading from "@/components/layout/Loading";

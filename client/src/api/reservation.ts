@@ -1,4 +1,4 @@
-import { NewReservation, Reservation } from "../../../server/src/schemas";
+import { NewReservation, Reservation } from "@server/src/schemas";
 const BASE_URL = import.meta.env.VITE_API_URL + "/reservation";
 
 export const getAll = async () => {

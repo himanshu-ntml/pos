@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import RecentOrders from "./RecentOrders";
 import { recentCompletedOrders } from "@/api/orders";
-import { Order } from "../../../../server/src/schemas";
+import { Order } from "@server/src/schemas";
 import Error from "../layout/Error";
 import { Button } from "../ui/button";
 import { markClean } from "@/api/tables";

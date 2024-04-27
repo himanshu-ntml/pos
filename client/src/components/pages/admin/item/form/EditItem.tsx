@@ -5,11 +5,7 @@ import { useForm } from "react-hook-form";
 import { getOne } from "@/api/items";
 import { useNavigate } from "react-router-dom";
 
-import {
-  type Item,
-  newItemSchema,
-  NewItem,
-} from "../../../../../../../server/src/schemas";
+import { type Item, newItemSchema, NewItem } from "@server/src/schemas";
 
 import { Button } from "@/components/ui/button";
 import { ItemFields } from "./ItemFields";
