@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import RecentOrders from "./RecentOrders";
 import { recentCompletedOrders } from "@/api/orders";
-import { Order } from "@server/src/schemas";
+import { type OrderWithUserAndBill } from "@server/src/schemas";
 import Error from "../layout/Error";
 import { Button } from "../ui/button";
 import { markClean } from "@/api/tables";
@@ -12,13 +12,17 @@ import { PlusIcon } from "lucide-react";
 
 type EmptytableProps = { tableId: number; clean: boolean; tableNumber: number };
 
-export default function EmptyTable({ tableId, clean, tableNumber }: EmptytableProps) {
+export default function EmptyTable({
+  tableId,
+  clean,
+  tableNumber,
+}: EmptytableProps) {
   const { toast } = useToast();
   const { setSelectedTable } = useStore();
 
   const navigate = useNavigate();
-  
-  const { data, isLoading, isError } = useQuery<Order[]>({
+
+  const { data, isLoading, isError } = useQuery<OrderWithUserAndBill[]>({
     queryKey: ["table", tableId],
     queryFn: () => recentCompletedOrders(tableId),
   });
@@ -49,7 +53,9 @@ export default function EmptyTable({ tableId, clean, tableNumber }: EmptytablePr
       {!!data?.length ? (
         <RecentOrders data={data} />
       ) : (
-        <p className="text-md text-center text-gray-500">No recent orders are available to display at this time.</p>
+        <p className="text-md text-center text-gray-500">
+          No recent orders are available to display at this time.
+        </p>
       )}
       {!clean && (
         <Button variant="outline" onClick={() => makeClean.mutate()} size="sm">

@@ -26,7 +26,6 @@ export const orders = pgTable("orders", {
   isPaid: boolean("is_paid").default(false).notNull(),
   status: orderStatus("order_status").default("In Progress").notNull(),
   specialRequest: text("special_request"),
-  totalPrice: decimal("total_price"),
   billId: integer("bill_id"),
   createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
 });

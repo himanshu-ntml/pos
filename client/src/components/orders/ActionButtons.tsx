@@ -103,7 +103,11 @@ export default function ActionButtons({ orderId, status, isPaid, tableId, totalA
       {!isPaid && <AddItem fullWidth orderId={orderId} tableId={tableId} />}
 
       {status !== "In Progress" && (
-        <Button className="w-full" onClick={handleOrderServed} disabled={!!isPaid && status === "Completed"}>
+        <Button
+          className="w-full"
+          onClick={handleOrderServed}
+          disabled={!!isPaid && status === "Completed"}
+        >
           {buttonText[status]}
         </Button>
       )}

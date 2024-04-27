@@ -43,6 +43,13 @@
       "when": 1714127052404,
       "tag": "0005_clammy_shriek",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1714222394626,
+      "tag": "0006_safe_redwing",
+      "breakpoints": true
     }
   ]
 }
