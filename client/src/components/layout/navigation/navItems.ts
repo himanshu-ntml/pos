@@ -1,4 +1,12 @@
-import { HomeIcon, BookOpenText, LineChart, PersonStanding, ConciergeBell, Ham } from "lucide-react";
+import {
+  HomeIcon,
+  BookOpenText,
+  LineChart,
+  PersonStanding,
+  ConciergeBell,
+  Ham,
+  BookMarked,
+} from "lucide-react";
 import TableIcon from "../TableIcon";
 import ChefIcon from "./ChefIcon";
 
@@ -24,15 +32,10 @@ export default [
   {
     id: 4,
     title: "Menu",
-    icon: Ham,
+    icon: BookOpenText,
     link: "/menu",
   },
-  {
-    id: 5,
-    title: "Analytics",
-    icon: LineChart,
-    link: "/reports",
-  },
+
   {
     id: 345345,
     title: "Waiter",
@@ -42,7 +45,7 @@ export default [
   {
     id: 41452,
     title: "Reservations",
-    icon: BookOpenText,
+    icon: BookMarked,
     link: "/reservations",
   },
   {
@@ -50,5 +53,17 @@ export default [
     title: "Kitchen",
     icon: ChefIcon,
     link: "/kitchen",
+  },
+  {
+    id: 242,
+    title: "Menu Items",
+    icon: Ham,
+    link: "/admin/items",
+  },
+  {
+    id: 5,
+    title: "Analytics",
+    icon: LineChart,
+    link: "/reports",
   },
 ];
