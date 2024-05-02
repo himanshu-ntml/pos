@@ -10,3 +10,4 @@ export * from "./ingredient";
 export * from "./file";
 export * from "./store";
 export * from "./bill";
+export * from "./venue";

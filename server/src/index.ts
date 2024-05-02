@@ -15,6 +15,7 @@ import storeRouter from "./routes/store";
 import billRouter from "./routes/bill";
 import authRouter from "./routes/auth";
 import paymentRouter from "./routes/payment";
+import venueSettingsRouter from "./routes/venue";
 import * as middlewares from "./middlewares";
 
 dotenv.config();
@@ -39,7 +40,7 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
-  }),
+  })
 );
 
 app.use(express.json());
@@ -57,6 +58,7 @@ app.use("/store", storeRouter);
 app.use("/bill", billRouter);
 app.use("/auth", authRouter);
 app.use("/payment", paymentRouter);
+app.use("/venueSettings", venueSettingsRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("TypeScript Server Wohooo");

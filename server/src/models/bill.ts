@@ -101,11 +101,14 @@ export const paidThisWeek = async () => {
     .select()
     .from(bills)
     .where(gte(bills.createdAt, subDays(today, 7)));
-  return result
-    .reduce((acc, cur) => {
-      return acc + Number(cur.totalAmount);
-    }, 0)
-    .toFixed(2);
+  return (
+    result &&
+    result
+      .reduce((acc, cur) => {
+        return acc + Number(cur.totalAmount);
+      }, 0)
+      .toFixed(2)
+  );
 };
 
 export const paidThisMonth = async () => {

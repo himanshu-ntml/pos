@@ -1,0 +1,1 @@
+ALTER TABLE "venue_settings" ADD COLUMN "updated_at" date DEFAULT 'now()' NOT NULL;

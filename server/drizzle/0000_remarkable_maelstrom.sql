@@ -1,4 +1,10 @@
 DO $$ BEGIN
+ CREATE TYPE "user_roles" AS ENUM('admin', 'user', 'waiter', 'chef', 'manager');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
  CREATE TYPE "table_status" AS ENUM('available', 'occupied', 'reserved', 'closed');
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -41,10 +47,11 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text,
 	"email" text NOT NULL,
-	"password" text,
-	"role" text,
+	"password" text NOT NULL,
+	"role" "user_roles" DEFAULT 'user' NOT NULL,
 	"created_at" timestamp DEFAULT now(),
-	"updated_at" timestamp
+	"updated_at" timestamp,
+	CONSTRAINT "user_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "tables" (
@@ -107,7 +114,6 @@ CREATE TABLE IF NOT EXISTS "orders" (
 	"is_paid" boolean DEFAULT false NOT NULL,
 	"order_status" "order_status" DEFAULT 'In Progress' NOT NULL,
 	"special_request" text,
-	"total_price" numeric,
 	"bill_id" integer,
 	"created_at" timestamp DEFAULT now() NOT NULL
 );
@@ -124,7 +130,8 @@ CREATE TABLE IF NOT EXISTS "items" (
 	"spicy" boolean,
 	"preparation_time" numeric NOT NULL,
 	"category_id" integer,
-	"created_at" timestamp DEFAULT now()
+	"created_at" timestamp DEFAULT now(),
+	"available" boolean DEFAULT true
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "ingredients" (
@@ -191,6 +198,21 @@ CREATE TABLE IF NOT EXISTS "payments" (
 	"created_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "venue_settings" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"address" text NOT NULL,
+	"phone" text,
+	"email" text,
+	"website" text,
+	"manager_name" text,
+	"description" text,
+	"capacity" integer,
+	"amenities" text,
+	"accessibility_information" text,
+	"images" text,
+	"created_at" date DEFAULT 'now()' NOT NULL
+);
+--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "profile" ADD CONSTRAINT "profile_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
@@ -241,6 +263,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "payments" ADD CONSTRAINT "payments_bill_id_bills_id_fk" FOREIGN KEY ("bill_id") REFERENCES "bills"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "payments" ADD CONSTRAINT "payments_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

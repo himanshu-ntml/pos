@@ -5,50 +5,15 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1712579569852,
-      "tag": "0000_white_alex_power",
+      "when": 1714417831642,
+      "tag": "0000_remarkable_maelstrom",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1712579767546,
-      "tag": "0001_calm_prism",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1712587081426,
-      "tag": "0002_nappy_doctor_spectrum",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1712588076385,
-      "tag": "0003_gorgeous_thor",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1713560903228,
-      "tag": "0004_even_marvel_apes",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1714127052404,
-      "tag": "0005_clammy_shriek",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1714222394626,
-      "tag": "0006_safe_redwing",
+      "when": 1714567270479,
+      "tag": "0001_sweet_russian",
       "breakpoints": true
     }
   ]

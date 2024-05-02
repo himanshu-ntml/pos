@@ -1,1 +1,0 @@
-ALTER TABLE "items" ADD COLUMN "available" boolean DEFAULT true;

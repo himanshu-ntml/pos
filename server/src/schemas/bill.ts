@@ -54,6 +54,10 @@ export const paymentsRelations = relations(payments, ({ one }) => ({
     fields: [payments.billId],
     references: [bills.id],
   }),
+  user: one(users, {
+    fields: [payments.userId],
+    references: [users.id],
+  }),
 }));
 
 export type Bill = typeof bills.$inferSelect;
