@@ -21,8 +21,8 @@ import type { OrderWithUserAndBill } from "@server/src/schemas";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "@/lib/utils";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import TablePDF from "./TablePDF";
+// import { PDFDownloadLink } from "@react-pdf/renderer";
+// import TablePDF from "./TablePDF";
 
 export default function OrderTable() {
   const navigate = useNavigate();
@@ -32,11 +32,11 @@ export default function OrderTable() {
   });
   if (isLoading) return <Loading />;
   if (isError) return <Error message="Fail to fetch orders" />;
-  const tableData: any[] = [
-    { column1: "Value 1", column2: "Value 2", column3: "Value 3", column4: "Value 4" },
-    { column1: "Value 5", column2: "Value 6", column3: "Value 7", column4: "Value 8" },
-    // Add more rows as needed
-  ];
+  // const tableData: any[] = [
+  //   { column1: "Value 1", column2: "Value 2", column3: "Value 3", column4: "Value 4" },
+  //   { column1: "Value 5", column2: "Value 6", column3: "Value 7", column4: "Value 8" },
+  //   // Add more rows as needed
+  // ];
 
   return (
     <Tabs defaultValue="week">
@@ -57,17 +57,19 @@ export default function OrderTable() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Filter by</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem checked>Fulfilled</DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem checked>
+                Fulfilled
+              </DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem>Declined</DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem>Refunded</DropdownMenuCheckboxItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <Button size="sm" variant="outline" className="h-7 gap-1 text-sm">
             <File className="h-3.5 w-3.5" />
-            {/* <span className="sr-only sm:not-sr-only">Export</span> */}
-            <PDFDownloadLink document={<TablePDF data={tableData} />} fileName="table.pdf">
-              {/* {({ blob, url, loading, error }) => (loading ? "Loading PDF..." : "Download PDF")} */}
-            </PDFDownloadLink>
+            <span className="sr-only sm:not-sr-only">Export</span>
+            {/* <PDFDownloadLink document={<TablePDF data={tableData} />} fileName="table.pdf">
+              {({ blob, url, loading, error }) => (loading ? "Loading PDF..." : "Download PDF")}
+            </PDFDownloadLink> */}
           </Button>
         </div>
       </div>
@@ -91,22 +93,34 @@ export default function OrderTable() {
               </TableHeader>
               <TableBody>
                 {data?.map((order) => (
-                  <TableRow onClick={() => navigate(`/order?id=${order.id}`)} key={order.id} className="cursor-pointer">
+                  <TableRow
+                    onClick={() => navigate(`/order?id=${order.id}`)}
+                    key={order.id}
+                    className="cursor-pointer"
+                  >
                     <TableCell>
                       <div className="font-medium">{order.id}</div>
                     </TableCell>
                     <TableCell>
                       <div className="font-medium">{order.user?.name}</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">{order.user?.role}</div>
+                      <div className="hidden text-sm text-muted-foreground md:inline">
+                        {order.user?.role}
+                      </div>
                     </TableCell>
                     <TableCell className="hidden sm:table-cell">
                       <Badge className="text-xs" variant="secondary">
                         {order.status}
                       </Badge>
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell">{order.isPaid ? "YEs" : "No"}</TableCell>
-                    <TableCell className="hidden md:table-cell">{format(order.createdAt, "dd/MM/yyyy")}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(order.bill?.totalAmount)}</TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      {order.isPaid ? "YEs" : "No"}
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {format(order.createdAt, "dd/MM/yyyy")}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {formatCurrency(order.bill?.totalAmount)}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -24,7 +24,7 @@ import { OrderWithItems } from "@server/src/models/order";
 import TableDetails from "./TableDetails";
 import TableButton from "./TableButton";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import ActionButtons from "../orders/ActionButtons";
+import ActionButtons from "../pages/orders/ActionButtons";
 import EmptyTable from "./EmptyTable";
 import { summarizePrice } from "@/lib/utils";
 import { format } from "date-fns";

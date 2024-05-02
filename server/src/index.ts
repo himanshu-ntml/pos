@@ -1,5 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import serverless from "serverless-http";
+
 import tableRouter from "./routes/table";
 import reservationRouter from "./routes/reservation";
 import orderRouter from "./routes/order";
@@ -60,9 +62,9 @@ app.use("/auth", authRouter);
 app.use("/payment", paymentRouter);
 app.use("/venueSettings", venueSettingsRouter);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("TypeScript Server Wohooo");
-});
+// app.get("/", (req: Request, res: Response) => {
+//   res.send("TypeScript Server Wohooo");
+// });
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
@@ -70,3 +72,5 @@ app.use(middlewares.errorHandler);
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
+
+// module.exports.handler = serverless(app);

@@ -5,6 +5,7 @@ import tokenService from "../services/token-service";
 export default function authMiddleware(req: Request, res: Response, next: NextFunction) {
   try {
     const authorizationHeader = req.headers["authorization"];
+    console.log("API MIDDLEWARE||AUTH HEADER:", authorizationHeader);
 
     if (!authorizationHeader) {
       return next(ApiError.UnauthorizedError());

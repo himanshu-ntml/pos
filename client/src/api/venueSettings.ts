@@ -1,0 +1,16 @@
+const BASE_URL = import.meta.env.VITE_API_URL + "/venueSettings";
+import { NewVenueSettings } from "@server/src/schemas";
+import $api from ".";
+
+export const getVenueSettings = async () => {
+  const response = await $api.get(BASE_URL);
+  return response.data;
+};
+export const updateVenueSettings = async (data: NewVenueSettings) => {
+  const response = await $api.put(BASE_URL, data);
+  return response.data;
+};
+export const createVenueSettings = async (data: NewVenueSettings) => {
+  const response = await $api.post(BASE_URL, data);
+  return response.data;
+};

@@ -5,11 +5,22 @@ import { router } from "@/router";
 import { Toaster } from "@/components/ui/toaster";
 import React, { useEffect } from "react";
 import { useVenueSettings } from "./hooks/useVenueSettings";
+import AuthProvider from "react-auth-kit";
+import createStore from "react-auth-kit/createStore";
 
 const queryClient = new QueryClient();
 
+const store = createStore({
+  authName: "_auth",
+  authType: "cookie",
+  cookieDomain: window.location.hostname,
+  cookieSecure: window.location.protocol === "https:",
+  debug: true,
+});
+
 function App() {
-  const { setVenueSettings, setVenueRegularSchedule, setVenueTables } = useVenueSettings();
+  const { setVenueSettings, setVenueRegularSchedule, setVenueTables } =
+    useVenueSettings();
 
   useEffect(() => {
     setVenueSettings();
@@ -20,10 +31,12 @@ function App() {
   return (
     <React.StrictMode>
       <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <Toaster />
-        </QueryClientProvider>
+        <AuthProvider store={store}>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <Toaster />
+          </QueryClientProvider>
+        </AuthProvider>
       </ThemeProvider>
     </React.StrictMode>
   );

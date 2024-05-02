@@ -1,4 +1,4 @@
-import Orders from "@/components/orders/Orders";
+import Orders from "@/components/pages/orders/OrdersList";
 import { Button } from "@/components/ui/button";
 
 import { User2Icon, CheckCircle, ShoppingBasket } from "lucide-react";
@@ -28,24 +28,43 @@ export default function Waiter() {
             <Button className="h-24" size="lg" variant="outline">
               <div className="flex flex-col items-center gap-1">
                 <User2Icon className="h-6 w-6" />
-                <span className="text-sm font-medium leading-none">New Customers</span>
+                <span className="text-sm font-medium leading-none">
+                  New Customers
+                </span>
               </div>
             </Button>
           }
         />
-        <Button onClick={() => handleTabClick("orders")} className="h-24" size="lg" variant="outline">
+        <Button
+          onClick={() => handleTabClick("orders")}
+          className="h-24"
+          size="lg"
+          variant="outline"
+        >
           <div className="flex flex-col items-center gap-1">
             <ShoppingBasket className="h-6 w-6" />
             <span className="text-sm font-medium leading-none">Orders</span>
           </div>
         </Button>
-        <Button onClick={() => handleTabClick("completedOrders")} className="h-24" size="lg" variant="outline">
+        <Button
+          onClick={() => handleTabClick("completedOrders")}
+          className="h-24"
+          size="lg"
+          variant="outline"
+        >
           <div className="flex flex-col items-center gap-1">
             <CheckCircle className="h-6 w-6" />
-            <span className="text-sm font-medium leading-none">Completed Orders</span>
+            <span className="text-sm font-medium leading-none">
+              Completed Orders
+            </span>
           </div>
         </Button>
-        <Button onClick={() => handleTabClick("tables")} className="h-24" size="lg" variant="outline">
+        <Button
+          onClick={() => handleTabClick("tables")}
+          className="h-24"
+          size="lg"
+          variant="outline"
+        >
           <div className="flex flex-col items-center gap-1">
             <TableIcon className="h-6 w-6" />
             <span className="text-sm font-medium leading-none">Tables</span>

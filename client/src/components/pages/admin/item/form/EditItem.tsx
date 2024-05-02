@@ -17,7 +17,7 @@ import { defaultValues } from "./defaultValues";
 // import { toast } from "@/components/ui/use-toast";
 
 export default function EditItem() {
-  const [searchParams, _] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const navigate = useNavigate();
   const {
@@ -31,7 +31,7 @@ export default function EditItem() {
   });
   const form = useForm<NewItem>({
     resolver: zodResolver(newItemSchema),
-    defaultValues: { ...defaultValues },
+    defaultValues,
   });
   useEffect(() => {
     if (data) {

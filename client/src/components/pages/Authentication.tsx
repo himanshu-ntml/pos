@@ -6,15 +6,21 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import useAuth from "@/hooks/useAuth";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import $api from "@/api";
+import { decodeJwt } from "jose";
+import { toast } from "../ui/use-toast";
+import { Navigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.string().email().min(5, { message: "Required" }),
-  password: z.string().min(8, { message: "Password must be at least 8 characters" }),
+  password: z.string().min(4, { message: "Password too short" }),
 });
 
 export default function Authentication() {
-  const { login, isAuthenticated } = useAuth();
+  const signIn = useSignIn();
+  const auth = useAuthUser();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -23,11 +29,37 @@ export default function Authentication() {
       password: "",
     },
   });
-  if (isAuthenticated) {
-    return <div>You are logged in</div>;
-  }
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    login(values.email, values.password);
+  if (auth) return <Navigate to="/" />;
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const response = await $api
+      .post<{ session: string }>("/auth/login", {
+        email: values.email,
+        password: values.password,
+      })
+      .catch((e) => {
+        console.error("login.", e.response.data);
+        toast({
+          title: "Sign in Error",
+          description: e.response.data.message,
+          variant: "destructive",
+        });
+      });
+
+    if (!response?.data) {
+      return;
+    }
+    const user = decodeJwt(response.data.session);
+    console.log("DECRYPT USER: ", user);
+    signIn({
+      auth: {
+        token: response.data.session,
+        type: "Bearer",
+      },
+      userState: {
+        name: user.name,
+        id: user.id,
+      },
+    });
   }
   return (
     <section>
@@ -51,7 +83,12 @@ export default function Authentication() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input type="email" autoComplete="email" placeholder="example@mail.com" {...field} />
+                      <Input
+                        type="email"
+                        autoComplete="email"
+                        placeholder="example@mail.com"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -64,7 +101,12 @@ export default function Authentication() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" autoComplete="current-password" placeholder="********" {...field} />
+                      <Input
+                        type="password"
+                        autoComplete="current-password"
+                        placeholder="********"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -74,8 +116,13 @@ export default function Authentication() {
             </form>
           </Form>
           <div className="flex">
-            <p className="text-sm text-gray-500 dark:text-gray-400">Have a difficulty to login ?</p>
-            <a href="mailto:manager@email.com" className="text-sm ml-2 underline">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Have a difficulty to login ?
+            </p>
+            <a
+              href="mailto:manager@email.com"
+              className="text-sm ml-2 underline"
+            >
               Contact Manager
             </a>
           </div>

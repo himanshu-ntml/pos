@@ -20,16 +20,18 @@ export default function Items() {
   if (isError) {
     return <Error />;
   }
-  if (!data) {
-    return <p>No items was found.</p>;
-  }
+ 
   return (
     <main className="md:container md:mt-10 p-2 ">
       <div className="flex justify-between">
         <div>
           <h1 className="text-2xl font-bold">Menu Items</h1>
         </div>
-        <Modal title="Add item" description="Here you can add new items to the menu" buttonText="Add Item">
+        <Modal
+          title="Add item"
+          description="Here you can add new items to the menu"
+          buttonText="Add Item"
+        >
           <AddItem
             onClose={() => {
               refetch();
@@ -37,7 +39,11 @@ export default function Items() {
           />
         </Modal>
       </div>
-      <DataTable data={data} columns={columns} searchField="name" />
+      {!!data ? (
+        <DataTable data={data} columns={columns} searchField="name" />
+      ) : (
+        <p>No items was found.</p>
+      )}
     </main>
   );
 }

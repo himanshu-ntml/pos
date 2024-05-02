@@ -1,4 +1,4 @@
-import { MenuList } from "@/components/foodMenu/MenuList";
+import { MenuList } from "@/components/pages/menu/menuList/MenuList";
 // import GoBackButton from "@/components/orders/GoBackButton";
 
 export default function MenuPage() {
@@ -9,7 +9,9 @@ export default function MenuPage() {
         <div className="items-start md:items-center gap-4 md:gap-8 justify-between">
           <div className="grid gap-1 col-span-1">
             <h1 className="text-3xl font-bold tracking-tight">Menu</h1>
-            <p className="text-gray-500 dark:text-gray-400">Smile and make customers feel homey</p>
+            <p className="text-gray-500 dark:text-gray-400">
+              Smile and make customers feel homey
+            </p>
           </div>
         </div>
         <MenuList />

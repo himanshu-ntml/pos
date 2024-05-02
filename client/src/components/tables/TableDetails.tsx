@@ -1,5 +1,5 @@
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
-import DisplayOrderItems from "@/components/orders/DisplayOrderItems";
+import DisplayOrderItems from "@/components/pages/orders/DisplayOrderItems";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Badge } from "../ui/badge";

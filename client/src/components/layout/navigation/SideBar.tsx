@@ -2,10 +2,21 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import navItems from "./navItems";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+// import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-import { Package2, PanelLeft } from "lucide-react";
+// import { Package2, PanelLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { TriangleDownIcon } from "@radix-ui/react-icons";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 
 export default function SideBar() {
   return (
@@ -45,7 +56,7 @@ export default function SideBar() {
         </TooltipProvider>
       </aside>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-        <Sheet>
+        {/* <Sheet>
           <SheetTrigger asChild>
             <Button size="icon" variant="outline" className="sm:hidden">
               <PanelLeft className="h-5 w-5" />
@@ -74,7 +85,35 @@ export default function SideBar() {
               ))}
             </nav>
           </SheetContent>
-        </Sheet>
+        </Sheet> */}
+        <div className="flex md:hidden w-full">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="w-full">
+                <TriangleDownIcon className="size-5" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <NavigationMenu className="mx-auto">
+                <NavigationMenuList className="grid grid-cols-3 gap-4 p-4">
+                  {navItems.map((item) => (
+                    <DialogClose
+                      key={item.id}
+                      asChild
+                      className="flex flex-col h-24 items-center justify-center rounded-lg border dark:border-gray-700 border-gray-100 p-4 text-sm font-medium transition-colors hover:bg-gray-100/50 text-gray-800 hover:text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                    >
+                      <Link to={item.link} className="text-gray-400">
+                        <item.icon className="h-5 w-5" />
+
+                        {item.title}
+                      </Link>
+                    </DialogClose>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </DialogContent>
+          </Dialog>
+        </div>
       </header>
     </>
   );

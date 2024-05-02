@@ -50,9 +50,9 @@ export default function TableCards({ standalone }: TabelsGridProps) {
         reservations.map((reservation) => (
           <p key={reservation.id}>{reservation.expireAt}</p>
         ))}
-      <CardHeader className="flex md:flex-row items-center justify-between flex-col">
+      <CardHeader className="flex sm:flex-row items-center justify-between flex-col">
         <CardTitle className="text-xl font-semibold">Tables</CardTitle>
-        <div className="flex gap-3">
+        <div className="flex gap-3 sm:flex-row flex-col">
           <AddReservation />
           <AddTable />
         </div>

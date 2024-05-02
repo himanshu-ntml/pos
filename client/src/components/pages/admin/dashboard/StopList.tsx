@@ -47,6 +47,7 @@ export default function StopList() {
   const handleRemoveItemFromStopList = (itemId: number) => {
     removeFromStopList.mutate(itemId!);
   };
+  return null;
   return (
     <div className="grid gap-3">
       <div className="font-semibold text-red-400">Stop Menu</div>
@@ -65,15 +66,16 @@ export default function StopList() {
               <SelectLabel>Stop Items</SelectLabel>
               {isLoading && <SelectItem value="Loading">Loading...</SelectItem>}
               {isError && <SelectItem value="Error">Error</SelectItem>}
-              {data?.map((item) => {
-                if (item.isAvailable) {
-                  return (
-                    <SelectItem key={item.id} value={item.id.toString()}>
-                      {item.name}
-                    </SelectItem>
-                  );
-                }
-              })}
+              {!!data?.length &&
+                data?.map((item) => {
+                  if (item.isAvailable) {
+                    return (
+                      <SelectItem key={item.id} value={item.id.toString()}>
+                        {item.name}
+                      </SelectItem>
+                    );
+                  }
+                })}
             </SelectGroup>
           </SelectContent>
         </Select>
