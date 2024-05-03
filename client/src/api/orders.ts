@@ -92,9 +92,11 @@ export const addMoreItems = async ({
   });
   return await res.json();
 };
-export const makeReady = async (id: number) => {
-  const res = await fetch(`${BASE_URL}/ready/${id}`, {
+export const makeReady = async (orderId: number, itemId: number) => {
+  const res = await fetch(`${BASE_URL}/ready`, {
     method: "POST",
+    headers: { "Content-Type": "application/json;charset=utf-8" },
+    body: JSON.stringify({ itemId, orderId }),
   });
   return await res.json();
 };

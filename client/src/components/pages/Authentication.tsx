@@ -37,7 +37,6 @@ export default function Authentication() {
         password: values.password,
       })
       .catch((e) => {
-        console.error("login.", e.response.data);
         toast({
           title: "Sign in Error",
           description: e.response.data.message,
@@ -49,7 +48,6 @@ export default function Authentication() {
       return;
     }
     const user = decodeJwt(response.data.session);
-    console.log("DECRYPT USER: ", user);
     signIn({
       auth: {
         token: response.data.session,
@@ -72,7 +70,7 @@ export default function Authentication() {
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
         <Card className="w-full mx-auto md:w-[500px] p-6 space-y-4">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Sign in to your account
+            Login to your account
           </h1>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -112,7 +110,7 @@ export default function Authentication() {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <Button type="submit">Login</Button>
             </form>
           </Form>
           <div className="flex">

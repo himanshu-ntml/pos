@@ -1,4 +1,4 @@
-import { and, eq, gte, ne } from "drizzle-orm";
+import { and, eq, getTableColumns, gte, ne } from "drizzle-orm";
 
 import { db } from "../db";
 import {
@@ -10,6 +10,7 @@ import {
   tables,
   NewOrderItem,
   items,
+  users,
 } from "../schemas";
 import { combineItems } from "../utils";
 import { subDays } from "date-fns";
@@ -80,7 +81,9 @@ export const getAll = async () => {
   }
 };
 type Unpromisify<T> = T extends Promise<infer U> ? U : T;
-export type OrderWithItems = Unpromisify<ReturnType<typeof getOrdersWithItems>>[0];
+export type OrderWithItems = Unpromisify<
+  ReturnType<typeof getOrdersWithItems>
+>[0];
 
 export const getOrdersWithItems = async (status?: OrderStatus[number]) => {
   try {
@@ -129,7 +132,9 @@ export const create = async (values: NewOrderWithItems) => {
       .values({ tableId: values.tableId, userId: values.userId })
       .returning();
     const orderId = insertedOrder[0].id;
-    await db.insert(orderItems).values(values.items.map((item) => ({ ...item, orderId })));
+    await db
+      .insert(orderItems)
+      .values(values.items.map((item) => ({ ...item, orderId })));
 
     return {
       success: true,
@@ -188,8 +193,13 @@ export const pay = async (id: number) => {
 
 export const complete = async (id: number) => {
   try {
-    const result = await db.update(orders).set({ status: "Completed" }).where(eq(orders.id, id));
-    db.update(tables).set({ requireCleaning: true }).where(eq(tables.id, orders.tableId));
+    const result = await db
+      .update(orders)
+      .set({ status: "Completed" })
+      .where(eq(orders.id, id));
+    db.update(tables)
+      .set({ requireCleaning: true })
+      .where(eq(tables.id, orders.tableId));
     return result;
   } catch (error) {
     console.log(error);
@@ -198,7 +208,10 @@ export const complete = async (id: number) => {
 };
 export const cancelOrder = async (id: number) => {
   try {
-    const result = await db.update(orders).set({ status: "Cancelled" }).where(eq(orders.id, id));
+    const result = await db
+      .update(orders)
+      .set({ status: "Cancelled" })
+      .where(eq(orders.id, id));
     return result;
   } catch (error) {
     console.log(error);
@@ -208,7 +221,10 @@ export const cancelOrder = async (id: number) => {
 
 export const serve = async (id: number) => {
   try {
-    const result = await db.update(orders).set({ status: "Served" }).where(eq(orders.id, id));
+    const result = await db
+      .update(orders)
+      .set({ status: "Served" })
+      .where(eq(orders.id, id));
     return result;
   } catch (error) {
     console.log(error);
@@ -221,7 +237,10 @@ export const leave = async (id: number) => {
     const order = await db.select().from(orders).where(eq(orders.id, id));
     const { tableId } = order[0];
     if (!tableId) return;
-    const result = await db.update(tables).set({ status: "available" }).where(eq(tables.id, tableId));
+    const result = await db
+      .update(tables)
+      .set({ status: "available" })
+      .where(eq(tables.id, tableId));
     return result;
   } catch (error) {
     console.log(error);
@@ -230,7 +249,10 @@ export const leave = async (id: number) => {
 };
 export const reinstand = async (id: number) => {
   try {
-    const result = await db.update(orders).set({ status: "In Progress" }).where(eq(orders.id, id));
+    const result = await db
+      .update(orders)
+      .set({ status: "In Progress" })
+      .where(eq(orders.id, id));
     return result;
   } catch (error) {
     console.log(error);
@@ -255,7 +277,10 @@ export const recentCompletedOrders = async (tableId: number) => {
 
 export const addSpecailRequest = async (id: number, request: string) => {
   try {
-    const result = await db.update(orders).set({ specialRequest: request }).where(eq(orders.id, id));
+    const result = await db
+      .update(orders)
+      .set({ specialRequest: request })
+      .where(eq(orders.id, id));
     return result;
   } catch (error) {
     console.log(error);
@@ -266,7 +291,10 @@ export const addSpecailRequest = async (id: number, request: string) => {
 export const addMoreItemsToOrder = async (moreItems: NewOrderItem[]) => {
   try {
     const orderId = moreItems[0].orderId;
-    const existingOrderItems = await db.select().from(orderItems).where(eq(orderItems.orderId, orderId));
+    const existingOrderItems = await db
+      .select()
+      .from(orderItems)
+      .where(eq(orderItems.orderId, orderId));
 
     const combinedOrderItems = combineItems(existingOrderItems, moreItems);
 
@@ -291,22 +319,46 @@ export const getPending = async () => {
 
 export const getOrderItems = async () => {
   try {
+    const { password, ...rest } = getTableColumns(users);
     return await db
-      .select()
+      .select({
+        order_items: orderItems,
+        orders: orders,
+        items: items,
+        users: rest,
+        tables: tables,
+      })
       .from(orderItems)
       .where(eq(orders.status, "In Progress"))
       .leftJoin(orders, eq(orderItems.orderId, orders.id))
-      .leftJoin(items, eq(orderItems.itemId, items.id));
+      .leftJoin(items, eq(orderItems.itemId, items.id))
+      .leftJoin(users, eq(orders.userId, users.id))
+      .leftJoin(tables, eq(orders.tableId, tables.id));
   } catch (error) {
     console.log(error);
     return { error: "[db:getOrderItems] Went wrong.." };
   }
 };
 
-export const ready = async (id: number) => {
+export const ready = async ({
+  orderId,
+  itemId,
+}: {
+  orderId: number;
+  itemId: number;
+}) => {
   try {
-    const result = await db.update(orders).set({ status: "Ready" }).where(eq(orders.id, id));
-    return result;
+    const order = await db.query.orders.findFirst({
+      where: eq(orders.id, orderId),
+      with: {
+        orderItems: true,
+      },
+    });
+
+    console.log("REady ? , ", order);
+    // const result = await db.update(orders).set({ status: "Ready" }).where(eq(orders.id, id));
+    // return result;
+    return;
   } catch (error) {
     console.log(error);
     return { error: "[db:readyOrder] Went wrong.." };

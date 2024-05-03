@@ -11,12 +11,18 @@ import {
 import { relations } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { Item, items } from "./item";
-import { tables } from "./table";
+import { Table, tables } from "./table";
 import { User, users } from "./user";
 import { z } from "zod";
 import { Bill, bills } from "./bill";
 
-export const orderStatus = pgEnum("order_status", ["Ready", "In Progress", "Completed", "Cancelled", "Served"]);
+export const orderStatus = pgEnum("order_status", [
+  "Ready",
+  "In Progress",
+  "Completed",
+  "Cancelled",
+  "Served",
+]);
 
 export const orders = pgTable("orders", {
   id: serial("id").primaryKey().notNull(),
@@ -42,7 +48,7 @@ export const orderItems = pgTable(
   },
   (t) => ({
     pk: primaryKey({ columns: [t.orderId, t.itemId] }),
-  }),
+  })
 );
 
 export const ordersRelations = relations(orders, ({ one, many }) => ({
@@ -90,6 +96,12 @@ export type NewOrderWithItems = z.infer<typeof newOrderWithItemsSchema>;
 
 export type OrderStatus = typeof orderStatus.enumValues;
 
-export type OrderItemsWithOrderAndItems = NewOrderItem & { orders: Order; items: Item[] };
+export type OrderItemsWithOrderAndItems = {
+  orders: Order;
+  items: Item;
+  order_items: OrderItem;
+  users: User;
+  tables: Table;
+};
 export type OrderWithUser = Order & { user: User };
 export type OrderWithUserAndBill = OrderWithUser & { bill: Bill; user: User };

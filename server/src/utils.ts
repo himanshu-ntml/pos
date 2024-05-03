@@ -70,7 +70,7 @@ export function combineItems(existingOrderItems: OrderItem[], addMoreItems?: New
   return combinedOrderItems;
 }
 
-const AUTH_SECRET = "Jaica" || process.env.AUTH_SECRET;
+const AUTH_SECRET = process.env.AUTH_SECRET;
 
 const key = new TextEncoder().encode(AUTH_SECRET);
 
@@ -78,7 +78,7 @@ export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10 sec from now")
+    .setExpirationTime("1 day from now")
     .sign(key);
 }
 

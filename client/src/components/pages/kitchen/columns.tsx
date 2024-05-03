@@ -24,19 +24,21 @@ export const columns: ColumnDef<OrderItemsWithOrderAndItems>[] = [
     accessorKey: "quantity",
     header: () => <p className="text-xs">Quantity</p>,
     cell: (data) => {
-      return <div className="lowercase ml-4">{data.row.getValue("quantity")}</div>;
+      return (
+        <div className="lowercase ml-4">{data.row.getValue("quantity")}</div>
+      );
     },
   },
   {
     accessorKey: "action",
     header: () => <p className="text-xs">Action</p>,
-    cell: ({ row }) => {
-      const order = row.getValue("orders") as Order;
+    cell: (data) => {
+      const order = data.row.getValue("orders") as Order;
       const orderStatus = order?.status;
       const queryClient = useQueryClient();
 
       const ready = useMutation({
-        mutationFn: () => makeReady(order.id),
+        mutationFn: () => makeReady(order.id, data.row.original.items.id),
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ["orders"] });
         },
@@ -44,10 +46,16 @@ export const columns: ColumnDef<OrderItemsWithOrderAndItems>[] = [
           console.error("Sometning went wrong", error);
         },
       });
+      console.log("ITEM ID: ", data);
       return (
         <div className="flex gap-2">
           <Button size="sm">Accept order</Button>
-          <Button onClick={() => ready.mutate()} disabled={orderStatus !== "In Progress"} size="sm" variant="outline">
+          <Button
+            onClick={() => ready.mutate()}
+            disabled={orderStatus !== "In Progress"}
+            size="sm"
+            variant="outline"
+          >
             Ready?
           </Button>
         </div>

@@ -15,7 +15,6 @@ const store = createStore({
   authType: "cookie",
   cookieDomain: window.location.hostname,
   cookieSecure: window.location.protocol === "https:",
-  debug: true,
 });
 
 function App() {

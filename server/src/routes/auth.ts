@@ -28,7 +28,11 @@ router.post("/login", async (req: Request, res: Response) => {
     if (!match) return res.status(401).json({ message: "Invalid credentials" });
 
     const expires = new Date(Date.now() + 300 * 60 * 1000);
-    const session = await encrypt({ id: user.id, name: user.name, expires });
+    const session = await encrypt({
+      id: user.id,
+      name: user.name,
+      role: user.role,
+    });
     res.cookie("session", session, { expires, httpOnly: true });
     res.status(200).send({ session });
   } catch (error) {

@@ -72,7 +72,6 @@ export default function ChangeVenueSettingsDialog() {
   }, [venueSettings]);
 
   function onSubmit(values: NewVenueSettings) {
-    console.log("SUbmitting venue settings: ", values);
     updateSettings.mutate(values);
   }
   const fields = settingsFields

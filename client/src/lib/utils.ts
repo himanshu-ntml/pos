@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { Item as OrderItem } from "@/types";
 
-import { Item } from "@server/src/schemas";
+import { Item, OrderItemsWithOrderAndItems } from "@server/src/schemas";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -59,3 +59,40 @@ export function formatCurrency(
 
   return formatter.format(amountNumber);
 }
+
+interface CombinedOrder {
+  orderId: number;
+  tableId: number | null;
+  status: string;
+  itemId: number;
+  user: string | null;
+  createdAt: string;
+  table: number | null;
+  items: { name: string; quantity: number, id: number }[];
+}
+
+export function combinedOrders(data: OrderItemsWithOrderAndItems[]): CombinedOrder[]  {
+  const combinedOrderMap: { [orderId: number]: CombinedOrder } = {};
+
+  data.forEach((orderData) => {
+    const { orders, order_items, items } = orderData;
+    const { orderId, itemId, quantity } = order_items;
+
+    if (!combinedOrderMap[orderId]) {
+      combinedOrderMap[orderId] = {
+        orderId,
+        itemId,
+        createdAt: orders.createdAt,
+        table: orderData.tables.number,
+        user: orderData.users.name,
+        tableId: orders.tableId,
+        status: orders.status,
+        items: [],
+      };
+    }
+
+    combinedOrderMap[orderId].items.push({ name: items.name, quantity, id: items.id });
+  });
+
+  return Object.values(combinedOrderMap);
+};

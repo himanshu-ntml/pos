@@ -212,11 +212,20 @@ router.put("/addMore/:orderId", async (req, res) => {
   }
 });
 
-router.post("/ready/:id", async (req: Request, res: Response) => {
+router.post("/ready", async (req: Request, res: Response) => {
   try {
-    const id = req.params.id;
-    if (!id) return res.status(400).json({ message: "ID not found!" });
-    const data = await OrderModel.ready(Number(id));
+    console.log("READY : ", req.body);
+    const { itemId, orderId } = z
+      .object({
+        itemId: z.number(),
+        orderId: z.number(),
+      })
+      .parse(req.body);
+
+    if (!orderId || !itemId) {
+      return res.status(400).json({ message: "orderId not found!" });
+    }
+    const data = await OrderModel.ready({ orderId, itemId });
     res.status(200).json(data);
   } catch (error) {
     console.error(error);

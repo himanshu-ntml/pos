@@ -15,12 +15,13 @@ import KitchenPage from "./components/pages/kitchen/Kitchen";
 import SideBar from "./components/layout/navigation/SideBar";
 import Dashboard from "./components/pages/admin/dashboard/Dashboard";
 import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
+import SettingsPage from "./components/pages/admin/settings/SettingsPage";
 
 const Layout = () => {
   return (
     <>
       <SideBar />
-      <div className="lg:px-20">
+      <div className="sm:px-20">
         <Outlet />
       </div>
     </>
@@ -101,6 +102,10 @@ export const router = createBrowserRouter([
               {
                 path: "items/edit",
                 element: <EditItem />,
+              },
+              {
+                path: "settings",
+                element: <SettingsPage />,
               },
             ],
           },
