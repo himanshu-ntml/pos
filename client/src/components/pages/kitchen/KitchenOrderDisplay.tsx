@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { combinedOrders } from "@/lib/utils";
 import { OrderItemsWithOrderAndItems } from "@server/src/schemas";
-import { formatDistanceToNowStrict } from "date-fns";
+import { formatDistance } from "date-fns";
 import { useMemo } from "react";
 import KitchenOrderItems from "./KitchenOrderItems";
 
@@ -28,8 +28,9 @@ export default function KitchenOrderDisplay({
               </p>
               <p>
                 <b>Ordered at: </b>
-                {formatDistanceToNowStrict(order.createdAt, {
+                {formatDistance(order.createdAt, new Date(), {
                   addSuffix: true,
+                  includeSeconds: true,
                 })}
               </p>
               <span className="text-sm text-gray-500">

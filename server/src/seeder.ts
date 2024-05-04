@@ -258,7 +258,11 @@ async function seed() {
   ]);
 
   await db.insert(schema.venueSettings).values({
-    address: "123 Main St",
+    name: "Rest App",
+    address: "123 London Main St",
+    managerName: "Sergio",
+    email: "admin@resto-app.com",
+    website: "restro-app.com",
     phone: "555-1234",
     accessibilityInformation: "Accessible",
     amenities: "Pool",

@@ -24,7 +24,13 @@ export default function KitchenPage() {
         {/* {data && (
           <DataTable data={data} columns={columns} searchField="orderId" />
         )} */}
-        {data && <KitchenOrderDisplay data={data} />}
+        {!data?.length ? (
+          <p className="text-gray-400 text-center my-10">
+            No orders to display
+          </p>
+        ) : (
+          <KitchenOrderDisplay data={data} />
+        )}
       </Card>
     </main>
   );
