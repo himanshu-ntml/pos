@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 import { User2Icon, CheckCircle, ShoppingBasket } from "lucide-react";
 import NewCustomerButton from "./SelectTable";
-import TableIcon from "@/components/layout/TableIcon";
+import TableIcon from "@/components/layout/navigation/TableIcon";
 import TablesCards from "@/components/tables/TableCards";
 import { useSearchParams } from "react-router-dom";
 

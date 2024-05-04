@@ -88,3 +88,13 @@ export async function decrypt(input: string): Promise<any> {
   });
   return payload;
 }
+
+export function extractToken(inputString: string): string | null {
+  const tokenPattern: RegExp = /_auth=([^;]+)/;
+  const match: RegExpMatchArray | null = inputString.match(tokenPattern);
+  if (match && match.length > 1) {
+    return match[1];
+  } else {
+    return null;
+  }
+}

@@ -2,9 +2,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import navItems from "./navItems";
-// import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-// import { Package2, PanelLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

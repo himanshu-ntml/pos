@@ -16,7 +16,7 @@ import { Badge } from "../../ui/badge";
 import ActionButtons from "./ActionButtons";
 import { HandPlatter } from "lucide-react";
 import CountDownOpenOrder from "./CountDownOpenOrder";
-import TableIcon from "../../layout/TableIcon";
+import TableIcon from "../../layout/navigation/TableIcon";
 import { Link } from "react-router-dom";
 import { useVenueSettings } from "@/hooks/useVenueSettings";
 

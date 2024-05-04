@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { tokens } from "../schemas/token";
 import { SignJWT, jwtVerify } from "jose";
+import { decrypt } from "../utils";
 
 const AUTH_SECRET = process.env.AUTH_SECRET;
 const AUTH_REFRESH_SECRET = process.env.AUTH_REFRESH_SECRET;
@@ -26,9 +27,7 @@ class TokenService {
 
   async validateAccessToken(token: string) {
     try {
-      const { payload } = await jwtVerify(token, authSecretKey, {
-        algorithms: ["HS256"],
-      });
+      const payload = await decrypt(token);
       return payload;
     } catch (error) {
       return null;
@@ -42,7 +41,10 @@ class TokenService {
   }
 
   async saveToken(userId: number, refreshToken: string) {
-    const [tokenData] = await db.select().from(tokens).where(eq(tokens.userId, userId));
+    const [tokenData] = await db
+      .select()
+      .from(tokens)
+      .where(eq(tokens.userId, userId));
     if (tokenData) {
       tokenData["refreshToken"] = refreshToken;
       return tokenData;
@@ -54,7 +56,10 @@ class TokenService {
     return await db.delete(tokens).where(eq(tokens.refreshToken, refreshToken));
   }
   async findToken(refreshToken: string) {
-    return await db.select().from(tokens).where(eq(tokens.refreshToken, refreshToken));
+    return await db
+      .select()
+      .from(tokens)
+      .where(eq(tokens.refreshToken, refreshToken));
   }
 }
 

@@ -66,7 +66,7 @@ export default function StopList() {
               {isLoading && <SelectItem value="Loading">Loading...</SelectItem>}
               {isError && <SelectItem value="Error">Error</SelectItem>}
               {!!data?.length &&
-                data?.map((item) => {
+                data.map((item) => {
                   if (item.isAvailable) {
                     return (
                       <SelectItem key={item.id} value={item.id.toString()}>

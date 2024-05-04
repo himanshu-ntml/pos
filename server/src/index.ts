@@ -1,6 +1,6 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
-import serverless from "serverless-http";
+// import serverless from "serverless-http";
 
 import tableRouter from "./routes/table";
 import reservationRouter from "./routes/reservation";
@@ -18,7 +18,8 @@ import billRouter from "./routes/bill";
 import authRouter from "./routes/auth";
 import paymentRouter from "./routes/payment";
 import venueSettingsRouter from "./routes/venue";
-import * as middlewares from "./middlewares";
+import authMiddleware from "./middleware/auth-middleware";
+import * as errorMiddleware from "./middleware/error-middleware";
 
 dotenv.config();
 
@@ -47,27 +48,27 @@ app.use(
 
 app.use(express.json());
 
-app.use("/user", userRouter);
-app.use("/table", tableRouter);
-app.use("/reservation", reservationRouter);
-app.use("/order", orderRouter);
-app.use("/item", itemRouter);
-app.use("/nutrition", nutritionRouter);
-app.use("/category", categoryRouter);
-app.use("/ingredient", ingredientRouter);
-app.use("/upload", fileRouter);
-app.use("/store", storeRouter);
-app.use("/bill", billRouter);
+app.use("/user", authMiddleware, userRouter);
+app.use("/table", authMiddleware, tableRouter);
+app.use("/reservation", authMiddleware, reservationRouter);
+app.use("/order", authMiddleware, orderRouter);
+app.use("/item", authMiddleware, itemRouter);
+app.use("/nutrition", authMiddleware, nutritionRouter);
+app.use("/category", authMiddleware, categoryRouter);
+app.use("/ingredient", authMiddleware, ingredientRouter);
+app.use("/upload", authMiddleware, fileRouter);
+app.use("/store", authMiddleware, storeRouter);
+app.use("/bill", authMiddleware, billRouter);
 app.use("/auth", authRouter);
-app.use("/payment", paymentRouter);
-app.use("/venueSettings", venueSettingsRouter);
+app.use("/payment", authMiddleware, paymentRouter);
+app.use("/venueSettings", authMiddleware, venueSettingsRouter);
 
 // app.get("/", (req: Request, res: Response) => {
 //   res.send("TypeScript Server Wohooo");
 // });
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+// app.use(errorMiddleware.notFound);
+// app.use(errorMiddleware.error);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

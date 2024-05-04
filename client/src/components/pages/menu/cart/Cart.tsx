@@ -24,7 +24,7 @@ import { create, addMoreItems } from "@/api/orders";
 import { useNavigate } from "react-router-dom";
 import { summarizeOrder } from "@/lib/utils";
 import { Edit2, Trash2Icon, Utensils } from "lucide-react";
-import TableIcon from "@/components/layout/TableIcon";
+import TableIcon from "@/components/layout/navigation/TableIcon";
 
 type CartProps = {
   onComplete?: () => void;

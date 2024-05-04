@@ -1,7 +1,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { CheckedState } from "@radix-ui/react-checkbox";
-import { FormEventHandler, useState } from "react";
+import { useState } from "react";
 
 type KitchenOrderItemsProps = {
   items: {
@@ -13,8 +13,8 @@ type KitchenOrderItemsProps = {
 };
 export default function KitchenOrderItems({
   items,
-  orderId,
-}: KitchenOrderItemsProps) {
+}: // orderId,
+KitchenOrderItemsProps) {
   const [checked, setChecked] = useState<number[]>([]);
 
   const handleChecked = (e: CheckedState, itemId: number) => {

@@ -342,7 +342,7 @@ export const getOrderItems = async () => {
 
 export const ready = async ({
   orderId,
-  itemId,
+  // itemId,
 }: {
   orderId: number;
   itemId: number;

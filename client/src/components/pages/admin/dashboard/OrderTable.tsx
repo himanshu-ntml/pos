@@ -32,6 +32,7 @@ export default function OrderTable() {
   });
   if (isLoading) return <Loading />;
   if (isError) return <Error message="Fail to fetch orders" />;
+  console.log("ORDER TABLE : ", { isLoading, isError, data });
   // const tableData: any[] = [
   //   { column1: "Value 1", column2: "Value 2", column3: "Value 3", column4: "Value 4" },
   //   { column1: "Value 5", column2: "Value 6", column3: "Value 7", column4: "Value 8" },
@@ -92,37 +93,38 @@ export default function OrderTable() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data?.map((order) => (
-                  <TableRow
-                    onClick={() => navigate(`/order?id=${order.id}`)}
-                    key={order.id}
-                    className="cursor-pointer"
-                  >
-                    <TableCell>
-                      <div className="font-medium">{order.id}</div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="font-medium">{order.user?.name}</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        {order.user?.role}
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden sm:table-cell">
-                      <Badge className="text-xs" variant="secondary">
-                        {order.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden sm:table-cell">
-                      {order.isPaid ? "YEs" : "No"}
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell">
-                      {format(order.createdAt, "dd/MM/yyyy")}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {formatCurrency(order.bill?.totalAmount)}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {!!data?.length &&
+                  data.map((order) => (
+                    <TableRow
+                      onClick={() => navigate(`/order?id=${order.id}`)}
+                      key={order.id}
+                      className="cursor-pointer"
+                    >
+                      <TableCell>
+                        <div className="font-medium">{order.id}</div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-medium">{order.user?.name}</div>
+                        <div className="hidden text-sm text-muted-foreground md:inline">
+                          {order.user?.role}
+                        </div>
+                      </TableCell>
+                      <TableCell className="hidden sm:table-cell">
+                        <Badge className="text-xs" variant="secondary">
+                          {order.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="hidden sm:table-cell">
+                        {order.isPaid ? "YEs" : "No"}
+                      </TableCell>
+                      <TableCell className="hidden md:table-cell">
+                        {format(order.createdAt, "dd/MM/yyyy")}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {formatCurrency(order.bill?.totalAmount)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </CardContent>
