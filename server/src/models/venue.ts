@@ -14,7 +14,7 @@ export const updateSettings = async (data: VenueSettings) => {
   try {
     return await db
       .update(venueSettings)
-      .set(data)
+      .set({ ...data, updatedAt: new Date().toDateString() })
       .where(eq(venueSettings.id, data.id))
       .returning();
   } catch (error) {

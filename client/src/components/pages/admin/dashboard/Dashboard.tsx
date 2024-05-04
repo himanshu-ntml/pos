@@ -1,6 +1,6 @@
 import SummaryCard from "./SummaryCard";
 import OrderTable from "./OrderTable";
-import OrderDetails from "./venueSettings";
+import VenueDetails from "./VenueDetails";
 
 export default function Dashboard() {
   return (
@@ -12,7 +12,7 @@ export default function Dashboard() {
             <OrderTable />
           </div>
           <div>
-            <OrderDetails />
+            <VenueDetails />
           </div>
         </main>
       </div>

@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import {
   Card,
   CardContent,
@@ -11,7 +12,6 @@ import { Separator } from "@/components/ui/separator";
 
 import StopList from "./StopList";
 
-import ChangeSettingsDialog from "./ChangeSettingsDialog";
 import { useQuery } from "@tanstack/react-query";
 import { getVenueSettings } from "@/api/venueSettings";
 import { VenueSettings } from "@server/src/schemas";
@@ -37,7 +37,6 @@ export default function VenueDetails() {
           </CardTitle>
           <CardDescription>{new Date().toDateString()}</CardDescription>
         </div>
-        <ChangeSettingsDialog />
       </CardHeader>
       {isLoading ? (
         <Loading />
@@ -45,35 +44,63 @@ export default function VenueDetails() {
         <CardContent className="p-6 text-sm">
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-3">
-              <div className="font-semibold">Venue Address</div>
+              <div className="font-semibold">Address</div>
               <address className="grid gap-0.5 not-italic text-muted-foreground">
                 <span>{venueSettings?.address}</span>
               </address>
             </div>
             <div className="grid auto-rows-max gap-3">
-              <div className="font-semibold">Venue Manager</div>
+              <div className="font-semibold">Website</div>
               <div className="text-muted-foreground">
-                {venueSettings?.managerName}
+                {venueSettings?.website}
+              </div>
+            </div>
+            <div>
+              <div className="font-semibold">Phone Number</div>
+              <div className="text-muted-foreground">
+                {venueSettings?.phone}
               </div>
             </div>
           </div>
           <Separator className="my-4" />
           <StopList />
           <Separator className="my-4" />
-          <div className="grid gap-3">
-            <div className="font-semibold">Other Information</div>
-            <p className="text-muted-foreground">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi,
-              dolores!
-            </p>
-          </div>
+          <section className="grid gap-3">
+            <div className="font-semibold">Capacity Information</div>
+
+            <div className="flex justify-evenly">
+              <div>
+                <p className="font-semibold">Capacity</p>
+                <p className="text-muted-foreground">
+                  {venueSettings?.capacity}
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold">Amenities</p>
+                <p className="text-muted-foreground">
+                  {venueSettings?.amenities}
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold">Service Fee</p>
+                <p className="text-muted-foreground">
+                  {venueSettings?.serviceFee}
+                </p>
+              </div>
+            </div>
+          </section>
         </CardContent>
       )}
-      <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
-        <div className="text-xs text-muted-foreground">
-          Updated <time dateTime="2023-11-23">November 23, 2023</time>
-        </div>
-      </CardFooter>
+      {venueSettings?.updatedAt && (
+        <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
+          <div className="text-xs text-muted-foreground">
+            Updated{" "}
+            <time dateTime="2023-11-23">
+              {format(venueSettings.updatedAt, "dd MMM yy")}
+            </time>
+          </div>
+        </CardFooter>
+      )}
     </Card>
   );
 }

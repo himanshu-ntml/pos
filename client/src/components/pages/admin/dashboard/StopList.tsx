@@ -47,7 +47,6 @@ export default function StopList() {
   const handleRemoveItemFromStopList = (itemId: number) => {
     removeFromStopList.mutate(itemId!);
   };
-  return null;
   return (
     <div className="grid gap-3">
       <div className="font-semibold text-red-400">Stop Menu</div>
