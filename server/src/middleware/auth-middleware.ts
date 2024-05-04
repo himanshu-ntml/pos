@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import ApiError from "../api-error";
+import ApiError from "./api-error";
 import tokenService from "../services/token-service";
 import { extractToken } from "../utils";
 
@@ -9,24 +9,21 @@ export default async function authMiddleware(
   next: NextFunction
 ) {
   try {
-    const authorizationHeader = req.headers["cookie"];
+    const accessToken = req.cookies["session"];
 
-    if (!authorizationHeader) {
+    if (!accessToken) {
       return next(ApiError.UnauthorizedError());
     }
+    const userData = await tokenService.validateAccessToken(accessToken);
 
-    const accesToken = extractToken(authorizationHeader);
-
-    if (!accesToken) {
-      return next(ApiError.UnauthorizedError());
-    }
-
-    const userData = await tokenService.validateAccessToken(accesToken);
     if (!userData) {
       return next(ApiError.UnauthorizedError());
     }
+    console.log("ACCEESS TOKEN PAYLOAD: ", { accessToken, userData });
+
     req.user = userData;
-    next();
+
+    return next();
   } catch (error) {
     return next(ApiError.UnauthorizedError());
   }

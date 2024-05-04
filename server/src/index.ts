@@ -20,6 +20,7 @@ import paymentRouter from "./routes/payment";
 import venueSettingsRouter from "./routes/venue";
 import authMiddleware from "./middleware/auth-middleware";
 import * as errorMiddleware from "./middleware/error-middleware";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ declare global {
 const app: Express = express();
 const port = process.env.PORT || 4000;
 
+app.use(cookieParser());
 app.use("/public", express.static("public"));
 app.use(
   cors({
@@ -48,27 +50,27 @@ app.use(
 
 app.use(express.json());
 
-app.use("/user", authMiddleware, userRouter);
-app.use("/table", authMiddleware, tableRouter);
-app.use("/reservation", authMiddleware, reservationRouter);
-app.use("/order", authMiddleware, orderRouter);
-app.use("/item", authMiddleware, itemRouter);
-app.use("/nutrition", authMiddleware, nutritionRouter);
-app.use("/category", authMiddleware, categoryRouter);
-app.use("/ingredient", authMiddleware, ingredientRouter);
-app.use("/upload", authMiddleware, fileRouter);
-app.use("/store", authMiddleware, storeRouter);
-app.use("/bill", authMiddleware, billRouter);
+app.use("/user", userRouter);
+app.use("/table", tableRouter);
+app.use("/reservation", reservationRouter);
+app.use("/order", orderRouter);
+app.use("/item", itemRouter);
+app.use("/nutrition", nutritionRouter);
+app.use("/category", categoryRouter);
+app.use("/ingredient", ingredientRouter);
+app.use("/upload", fileRouter);
+app.use("/store", storeRouter);
+app.use("/bill", billRouter);
 app.use("/auth", authRouter);
-app.use("/payment", authMiddleware, paymentRouter);
-app.use("/venueSettings", authMiddleware, venueSettingsRouter);
+app.use("/payment", paymentRouter);
+app.use("/venueSettings", venueSettingsRouter);
 
 // app.get("/", (req: Request, res: Response) => {
 //   res.send("TypeScript Server Wohooo");
 // });
 
-// app.use(errorMiddleware.notFound);
-// app.use(errorMiddleware.error);
+app.use(errorMiddleware.notFound);
+app.use(errorMiddleware.error);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

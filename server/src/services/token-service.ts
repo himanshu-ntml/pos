@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { tokens } from "../schemas/token";
 import { SignJWT, jwtVerify } from "jose";
-import { decrypt } from "../utils";
 
 const AUTH_SECRET = process.env.AUTH_SECRET;
 const AUTH_REFRESH_SECRET = process.env.AUTH_REFRESH_SECRET;
@@ -14,20 +13,22 @@ class TokenService {
     const accessToken = await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
-      .setExpirationTime("10 sec from now")
+      .setExpirationTime("8 hours from now")
       .sign(authSecretKey);
 
-    const refreshToken = await new SignJWT(payload)
-      .setProtectedHeader({ alg: "HS256" })
-      .setIssuedAt()
-      .setExpirationTime("30 days")
-      .sign(authRefreshSecretKey);
-    return { accessToken, refreshToken };
+    // const refreshToken = await new SignJWT(payload)
+    //   .setProtectedHeader({ alg: "HS256" })
+    //   .setIssuedAt()
+    //   .setExpirationTime("30 days")
+    //   .sign(authRefreshSecretKey);
+    return accessToken;
   }
 
   async validateAccessToken(token: string) {
     try {
-      const payload = await decrypt(token);
+      const { payload } = await jwtVerify(token, authSecretKey, {
+        algorithms: ["HS256"],
+      });
       return payload;
     } catch (error) {
       return null;

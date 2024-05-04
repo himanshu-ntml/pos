@@ -1,6 +1,8 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Settings } from "lucide-react";
-import { Link } from "react-router-dom";
+// import { Settings } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import useSignOut from "react-auth-kit/hooks/useSignOut";
+
 import navItems from "./navItems";
 
 import { Button } from "@/components/ui/button";
@@ -15,8 +17,16 @@ import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { LogOut, Settings } from "lucide-react";
 
 export default function SideBar() {
+  const signOut = useSignOut();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    signOut();
+    navigate("/login");
+  };
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -49,6 +59,18 @@ export default function SideBar() {
                 </Link>
               </TooltipTrigger>
               <TooltipContent side="right">Settings</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span
+                  onClick={handleLogOut}
+                  className="cursor-pointer flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <LogOut className="h-5 w-5 text-destructive/60" />
+                  <span className="sr-only">Log Out</span>
+                </span>
+              </TooltipTrigger>
+              <TooltipContent side="right">Log Out</TooltipContent>
             </Tooltip>
           </nav>
         </TooltipProvider>

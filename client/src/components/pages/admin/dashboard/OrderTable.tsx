@@ -118,7 +118,7 @@ export default function OrderTable() {
                         {order.isPaid ? "YEs" : "No"}
                       </TableCell>
                       <TableCell className="hidden md:table-cell">
-                        {format(order.createdAt, "dd/MM/yyyy")}
+                        {order.createdAt}
                       </TableCell>
                       <TableCell className="text-right">
                         {formatCurrency(order.bill?.totalAmount)}

@@ -84,7 +84,7 @@ export default function StopList() {
           size="icon"
           disabled={!selectedItem}
         >
-          <PlusIcon />
+          Add
         </Button>
       </div>
       {data?.map((item) => {

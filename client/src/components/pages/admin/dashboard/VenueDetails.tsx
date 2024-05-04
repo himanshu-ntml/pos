@@ -68,7 +68,7 @@ export default function VenueDetails() {
           <section className="grid gap-3">
             <div className="font-semibold">Capacity Information</div>
 
-            <div className="flex justify-evenly">
+            <div className="flex justify-evenly md:flex-row flex-col gap-4">
               <div>
                 <p className="font-semibold">Capacity</p>
                 <p className="text-muted-foreground">

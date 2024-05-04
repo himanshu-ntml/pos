@@ -38,7 +38,7 @@ export default function Authentication() {
       })
       .catch((e) => {
         toast({
-          title: "Sign in Error",
+          title: "Something went wrong...",
           description: e.response.data.message,
           variant: "destructive",
         });

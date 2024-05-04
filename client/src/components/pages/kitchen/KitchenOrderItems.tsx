@@ -3,18 +3,20 @@ import { cn } from "@/lib/utils";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { useState } from "react";
 
+type Item = {
+  name: string;
+  quantity: number;
+  id: number;
+};
+
 type KitchenOrderItemsProps = {
-  items: {
-    name: string;
-    quantity: number;
-    id: number;
-  }[];
+  items: Item[];
   orderId: number;
 };
 export default function KitchenOrderItems({
   items,
-}: // orderId,
-KitchenOrderItemsProps) {
+  orderId,
+}: KitchenOrderItemsProps) {
   const [checked, setChecked] = useState<number[]>([]);
 
   const handleChecked = (e: CheckedState, itemId: number) => {
@@ -31,12 +33,12 @@ KitchenOrderItemsProps) {
         <li
           key={item.name}
           className={cn(
-            "flex justify-between",
+            "flex justify-between p-2 items-center",
             checked?.includes(item.id) && "backdrop-brightness-95 rounded-md"
           )}
         >
           <span>{item.name}</span>
-          <div className="flex gap-4">
+          <div className="flex gap-4  p-2 items-center">
             <span className="text-gray-500">x{item.quantity}</span>
             <Checkbox
               className="size-10 accent-emerald-50"

@@ -4,12 +4,11 @@ import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 import { db } from "../db";
 import { newUserSchema, userSchema, users } from "../schemas";
-import { encrypt } from "../utils";
+import tokenService from "../services/token-service";
 
 const router = Router();
 
 router.post("/login", async (req: Request, res: Response) => {
-  console.log("LOGIN >>> API", req.body);
   try {
     const schema = z.object({
       email: z.string().email(),
@@ -27,13 +26,13 @@ router.post("/login", async (req: Request, res: Response) => {
 
     if (!match) return res.status(401).json({ message: "Invalid credentials" });
 
-    const expires = new Date(Date.now() + 300 * 60 * 1000);
-    const session = await encrypt({
+    const session = await tokenService.generateToken({
       id: user.id,
       name: user.name,
       role: user.role,
     });
-    res.cookie("session", session, { expires, httpOnly: true });
+
+    res.cookie("session", session, { httpOnly: true });
     res.status(200).send({ session });
   } catch (error) {
     console.log("Auth", error);

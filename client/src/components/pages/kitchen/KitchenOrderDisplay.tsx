@@ -47,7 +47,7 @@ export default function KitchenOrderDisplay({
           </div>
 
           <hr className="my-2" />
-          <KitchenOrderItems items={order.items} orderId={order.orderId} />
+          <KitchenOrderItems items={order.items} orderId={order?.orderId} />
         </div>
       ))}
     </div>

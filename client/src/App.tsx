@@ -18,14 +18,14 @@ const store = createStore({
 });
 
 function App() {
-  const { setVenueSettings, setVenueRegularSchedule, setVenueTables } =
-    useVenueSettings();
+  // const { setVenueSettings, setVenueRegularSchedule, setVenueTables } =
+  //   useVenueSettings();
 
-  useEffect(() => {
-    setVenueSettings();
-    setVenueRegularSchedule();
-    setVenueTables();
-  }, []);
+  // useEffect(() => {
+  //   setVenueSettings();
+  //   setVenueRegularSchedule();
+  //   setVenueTables();
+  // }, []);
 
   return (
     <React.StrictMode>
