@@ -10,7 +10,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useQuery } from "@tanstack/react-query";
-import { ReservationTimeSlot } from "@server/src/utils";
+import { type ReservationTimeSlot } from "@server/src/utils";
 import { fetchTimeSlots } from "@/api/reservation";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import Loading from "@/components/layout/Loading";

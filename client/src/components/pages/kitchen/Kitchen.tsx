@@ -13,7 +13,6 @@ export default function KitchenPage() {
     queryKey: ["orders"],
     queryFn: getOrderItems,
   });
-  console.log("Kitchen data: ", data);
   return (
     <main className="md:p-2">
       <Card className="p-5">

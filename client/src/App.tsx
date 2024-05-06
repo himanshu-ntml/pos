@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "react-router-dom";
 import { router } from "@/router";
 import { Toaster } from "@/components/ui/toaster";
-import React, { useEffect } from "react";
-import { useVenueSettings } from "./hooks/useVenueSettings";
+import React from "react";
+// import { useVenueSettings } from "./hooks/useVenueSettings";
 import AuthProvider from "react-auth-kit";
 import createStore from "react-auth-kit/createStore";
 

@@ -13,7 +13,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { VenueSettings, venueSettingsSchema } from "@server/src/schemas";
+import { type VenueSettings, venueSettingsSchema } from "@server/src/schemas";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getVenueSettings, updateVenueSettings } from "@/api/venueSettings";
 import Loading from "@/components/layout/Loading";

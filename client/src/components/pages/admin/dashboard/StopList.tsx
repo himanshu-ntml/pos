@@ -7,11 +7,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { PlusIcon, XIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addItemToStopList, getAll, removeItemFromStopList } from "@/api/items";
-import { Item } from "@server/src/schemas";
+import type { Item } from "@server/src/schemas";
 import { useState } from "react";
 
 export default function StopList() {

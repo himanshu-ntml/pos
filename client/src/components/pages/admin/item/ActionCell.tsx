@@ -1,4 +1,4 @@
-import { Item } from "@server/src/schemas/item";
+import type { Item } from "@server/src/schemas/item";
 import { CellContext } from "@tanstack/react-table";
 import {
   DropdownMenu,

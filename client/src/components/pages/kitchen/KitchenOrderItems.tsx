@@ -13,10 +13,7 @@ type KitchenOrderItemsProps = {
   items: Item[];
   orderId: number;
 };
-export default function KitchenOrderItems({
-  items,
-  orderId,
-}: KitchenOrderItemsProps) {
+export default function KitchenOrderItems({ items }: KitchenOrderItemsProps) {
   const [checked, setChecked] = useState<number[]>([]);
 
   const handleChecked = (e: CheckedState, itemId: number) => {

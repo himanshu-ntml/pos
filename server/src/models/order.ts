@@ -340,13 +340,7 @@ export const getOrderItems = async () => {
   }
 };
 
-export const ready = async ({
-  orderId,
-  // itemId,
-}: {
-  orderId: number;
-  itemId: number;
-}) => {
+export const ready = async ({ orderId }: { orderId: number; itemId: number }) => {
   try {
     const order = await db.query.orders.findFirst({
       where: eq(orders.id, orderId),
@@ -356,8 +350,11 @@ export const ready = async ({
     });
 
     console.log("REady ? , ", order);
-    // const result = await db.update(orders).set({ status: "Ready" }).where(eq(orders.id, id));
-    // return result;
+    const result = await db
+      .update(orders)
+      .set({ status: "Ready" })
+      .where(eq(orders.id, orderId));
+    return result;
     return;
   } catch (error) {
     console.log(error);

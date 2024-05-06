@@ -3,7 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 
-import { Reservation } from "@server/src/schemas";
+import { type Reservation } from "@server/src/schemas";
 
 
 export const reservationColumns: ColumnDef<Reservation>[] = [

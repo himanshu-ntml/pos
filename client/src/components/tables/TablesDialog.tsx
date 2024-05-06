@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import Error from "@/components/layout/Error";
 import { getOneByTableId } from "@/api/orders";
-import { OrderWithItems } from "@server/src/models/order";
+import type { OrderWithItems } from "@server/src/models/order";
 
 import TableDetails from "./TableDetails";
 import TableButton from "./TableButton";
@@ -28,7 +28,7 @@ import ActionButtons from "../pages/orders/ActionButtons";
 import EmptyTable from "./EmptyTable";
 import { summarizePrice } from "@/lib/utils";
 import { format } from "date-fns";
-import { TableWithReservation } from "@server/src/schemas";
+import { type TableWithReservation } from "@server/src/schemas";
 
 export default function TableDialog({
   tableData,

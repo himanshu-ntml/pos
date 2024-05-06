@@ -77,7 +77,7 @@ export function combineItems(
         itemMap.get(key)!.quantity += item.quantity || 0;
       } else {
         itemMap.set(key, {
-          orderId: item.orderId,
+          orderId: item?.orderId,
           itemId: item.itemId,
           quantity: item.quantity || 0,
         });

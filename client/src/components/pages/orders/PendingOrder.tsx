@@ -7,7 +7,7 @@ import {
   Card,
 } from "@/components/ui/card";
 
-import { OrderWithItems } from "@server/src/models/order";
+import { type OrderWithItems } from "@server/src/models/order";
 
 import DisplayOrderItems from "./DisplayOrderItems";
 import { formatCurrency, summarizePrice } from "@/lib/utils";

@@ -13,7 +13,7 @@ import TipsButton from "./TipsButton";
 import usePayments from "@/hooks/usePayments";
 import { useQuery } from "@tanstack/react-query";
 import { getOneByOrderId } from "@/api/bills";
-import { BillWithPayments } from "@server/src/schemas";
+import { type BillWithPayments } from "@server/src/schemas";
 import PaymentsList from "./PaymentsList";
 import { ScrollArea } from "@/components/ui/scroll-area";
 

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getOne } from "@/api/orders";
 import Loading from "../../layout/Loading";
 import Error from "../../layout/Error";
-import { OrderWithItems } from "@server/src/models/order";
+import { type OrderWithItems } from "@server/src/models/order";
 import GoBackButton from "./GoBackButton";
 
 export default function OrderPage() {

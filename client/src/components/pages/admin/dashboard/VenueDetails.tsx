@@ -14,7 +14,7 @@ import StopList from "./StopList";
 
 import { useQuery } from "@tanstack/react-query";
 import { getVenueSettings } from "@/api/venueSettings";
-import { VenueSettings } from "@server/src/schemas";
+import type { VenueSettings } from "@server/src/schemas";
 import Loading from "@/components/layout/Loading";
 import Error from "@/components/layout/Error";
 

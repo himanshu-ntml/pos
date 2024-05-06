@@ -1,6 +1,6 @@
 import { useStore } from "@/store";
 import { Button } from "../../../ui/button";
-import { Item } from "@server/src/schemas/item";
+import { type Item } from "@server/src/schemas/item";
 import { useToast } from "@/components/ui/use-toast";
 import { PlusIcon } from "lucide-react";
 import { cn, formatCurrency } from "@/lib/utils";

@@ -3,7 +3,7 @@ import DisplayOrderItems from "@/components/pages/orders/DisplayOrderItems";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Badge } from "../ui/badge";
-import { OrderWithItems } from "@server/src/models/order";
+import type { OrderWithItems } from "@server/src/models/order";
 import { PoundSterling } from "lucide-react";
 
 type tableDetailsProps = {

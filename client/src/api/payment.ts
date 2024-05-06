@@ -1,4 +1,4 @@
-import { NewPayment } from "@server/src/schemas";
+import type { NewPayment } from "@server/src/schemas";
 
 const BASE_URL = import.meta.env.VITE_API_URL + "/payment";
 

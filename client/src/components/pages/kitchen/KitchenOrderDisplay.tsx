@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { combinedOrders } from "@/lib/utils";
-import { OrderItemsWithOrderAndItems } from "@server/src/schemas";
+import { type OrderItemsWithOrderAndItems } from "@server/src/schemas";
 import { formatDistance } from "date-fns";
 import { useMemo } from "react";
 import KitchenOrderItems from "./KitchenOrderItems";
+import MakeReadyButton from "./MakeReadyButton";
 
 type KitchenOrderDisplayProps = {
   data: OrderItemsWithOrderAndItems[];
@@ -43,7 +43,7 @@ export default function KitchenOrderDisplay({
                 )}
               </span>
             </div>
-            <Button>Order Ready</Button>
+            <MakeReadyButton orderId={order.orderId} itemId={order.itemId} />
           </div>
 
           <hr className="my-2" />

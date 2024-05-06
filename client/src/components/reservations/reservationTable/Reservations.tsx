@@ -3,7 +3,7 @@ import Error from "@/components/layout/Error";
 import Loading from "@/components/layout/Loading";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
-import { Reservation } from "@server/src/schemas";
+import { type Reservation } from "@server/src/schemas";
 import { DataTable } from "@/components/Data-table";
 import { reservationColumns } from "./reservationColumns";
 import AddReservation from "../addReservation/AddReservation";

@@ -6,8 +6,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { create } from "@/api/tables";
-import { NewTable, insertTableSchema } from "@server/src/schemas";
+import { type NewTable, insertTableSchema } from "@server/src/schemas";
 import { Textarea } from "@/components/ui/textarea";
+import { AxiosError } from "axios";
 
 type AddTableFormProps = {
   onClose: () => void;
@@ -32,8 +33,11 @@ export default function AddTableForm({ onClose }: AddTableFormProps) {
       onClose();
     },
     onError: (error) => {
-      if ("message" in error) {
+      if (error instanceof Error) {
         form.setError("number", { message: error.message });
+      }
+      if (error instanceof AxiosError) {
+        form.setError("number", { message: error?.response?.data });
       }
     },
   });
@@ -124,7 +128,11 @@ export default function AddTableForm({ onClose }: AddTableFormProps) {
           )}
         />
 
-        <Button variant="outline" disabled={addNewTable.isPending} type="submit">
+        <Button
+          variant="outline"
+          disabled={addNewTable.isPending}
+          type="submit"
+        >
           Create a table
         </Button>
       </form>

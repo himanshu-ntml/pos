@@ -9,19 +9,19 @@ export default async function authMiddleware(
   next: NextFunction
 ) {
   try {
-    const accessToken = req.cookies["session"];
+    const accessToken = req.cookies;
+    console.log("ACCESS TOKEN: ", accessToken);
+    // if (!accessToken) {
+    //   return next(ApiError.UnauthorizedError());
+    // }
+    // const userData = await tokenService.validateAccessToken(accessToken);
 
-    if (!accessToken) {
-      return next(ApiError.UnauthorizedError());
-    }
-    const userData = await tokenService.validateAccessToken(accessToken);
+    // if (!userData) {
+    //   return next(ApiError.UnauthorizedError());
+    // }
+    // console.log("ACCEESS TOKEN PAYLOAD: ", { accessToken, userData });
 
-    if (!userData) {
-      return next(ApiError.UnauthorizedError());
-    }
-    console.log("ACCEESS TOKEN PAYLOAD: ", { accessToken, userData });
-
-    req.user = userData;
+    // req.user = userData;
 
     return next();
   } catch (error) {

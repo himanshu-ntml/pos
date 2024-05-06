@@ -1,7 +1,11 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 
-import { Item, Order, OrderItemsWithOrderAndItems } from "@server/src/schemas";
+import type {
+  Item,
+  Order,
+  OrderItemsWithOrderAndItems,
+} from "@server/src/schemas";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeReady } from "@/api/orders";
 

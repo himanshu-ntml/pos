@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { NewReservation } from "@server/src/schemas";
+import { type NewReservation } from "@server/src/schemas";
 import { UseFormReturn } from "react-hook-form";
 import { useState } from "react";
 import ReservationInfo from "./stages/ReservationInfo";

@@ -8,8 +8,8 @@ import {
   TableFooter,
 } from "@/components/ui/table";
 import { formatCurrency } from "@/lib/utils";
-import { Bill } from "@server/src/schemas";
-import { Item } from "@/types";
+import { type Bill } from "@server/src/schemas";
+import { type Item } from "@/types";
 
 type DisplayOrderItemsProps = {
   items: Item[];

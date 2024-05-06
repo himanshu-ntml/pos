@@ -1,4 +1,4 @@
-import { OrderWithItems } from "@server/src/models/order";
+import type { OrderWithItems } from "@server/src/models/order";
 import type {
   OrderStatus,
   NewOrderWithItems,

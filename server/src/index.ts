@@ -51,7 +51,7 @@ app.use(
 app.use(express.json());
 
 app.use("/user", userRouter);
-app.use("/table", tableRouter);
+app.use("/table", authMiddleware, tableRouter);
 app.use("/reservation", reservationRouter);
 app.use("/order", orderRouter);
 app.use("/item", itemRouter);
