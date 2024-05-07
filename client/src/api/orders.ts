@@ -15,69 +15,53 @@ export const getAll = async (status?: OrderStatus[number]) => {
   return data;
 };
 export const getPending = async (): Promise<OrderWithItems[]> => {
-  const res = await fetch(`${BASE_URL}/pending`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}/pending`);
+  return await res.data;
 };
 export const getOrderItems = async (): Promise<
   OrderItemsWithOrderAndItems[]
 > => {
-  const res = await fetch(`${BASE_URL}/orderItems`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}/orderItems`);
+  return await res.data;
 };
 export const getOne = async (id: number) => {
-  const res = await fetch(`${BASE_URL}/${id}`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}/${id}`);
+  return await res.data;
 };
 
 export const getOneByTableId = async (tableId: number) => {
-  const res = await fetch(`${BASE_URL}/byTableId/${tableId}`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}/byTableId/${tableId}`);
+  return await res.data;
 };
 export const deleteOne = async (id: number) => {
-  const res = await fetch(BASE_URL, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify({ id }),
-  });
-  return await res.json();
+  const res = await $api.delete(`${BASE_URL}/${id}`);
+  return await res.data;
 };
 
 export const create = async (data: NewOrderWithItems) => {
-  const res = await fetch(BASE_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify(data),
-  });
-  return await res.json();
+  const res = await $api.post(BASE_URL, data);
+  return await res.data;
 };
 
 export const serve = async (id: number) => {
-  const res = await fetch(`${BASE_URL}/serve/${id}`, {
-    method: "POST",
-  });
-  return await res.json();
+  const res = await $api.post(`${BASE_URL}/serve/${id}`);
+  return await res.data;
 };
 export const complete = async (id: number) => {
-  const res = await fetch(`${BASE_URL}/complete/${id}`, {
-    method: "POST",
-  });
-  return await res.json();
+  const res = await $api.post(`${BASE_URL}/complete/${id}`);
+  return await res.data;
 };
 export const leave = async (id: number) => {
-  const res = await fetch(`${BASE_URL}/leave/${id}`, {
-    method: "POST",
-  });
-  return await res.json();
+  const res = await $api.post(`${BASE_URL}/leave/${id}`);
+  return await res.data;
 };
 export const recentCompletedOrders = async (tableId: number) => {
-  const res = await fetch(`${BASE_URL}/recent/${tableId}`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}/recent/${tableId}`);
+  return await res.data;
 };
 export const addSpecailRequest = async (orderId: number) => {
-  const res = await fetch(`${BASE_URL}/addSpecialRequest/${orderId}`, {
-    method: "POST",
-  });
-  return await res.json();
+  const res = await $api.post(`${BASE_URL}/addSpecialRequest/${orderId}`);
+  return await res.data;
 };
 export const addMoreItems = async ({
   id,
@@ -86,23 +70,15 @@ export const addMoreItems = async ({
   id: number;
   data: OrderItem[];
 }) => {
-  const res = await fetch(`${BASE_URL}/addMore/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify(data),
-  });
-  return await res.json();
+  const res = await $api.put(`${BASE_URL}/addMore/${id}`, data);
+  return await res.data;
 };
 export const makeReady = async (orderId: number, itemId: number) => {
-  const res = await fetch(`${BASE_URL}/ready`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify({ itemId, orderId }),
-  });
-  return await res.json();
+  const res = await $api.post(`${BASE_URL}/ready`, { itemId, orderId });
+  return await res.data;
 };
 
 export const recentOrders = async () => {
-  const res = await fetch(`${BASE_URL}/recent-orders`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}/recent-orders`);
+  return await res.data;
 };

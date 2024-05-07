@@ -22,7 +22,9 @@ declare global {
 }
 
 // https://github.com/neondatabase/serverless/issues/66
-const client: NeonQueryFunction<boolean, boolean> = neon(process.env.DATABASE_URL);
+const client: NeonQueryFunction<boolean, boolean> = neon(
+  process.env.DATABASE_URL
+);
 export const db = drizzle(client, { schema });
 
 async function seed() {

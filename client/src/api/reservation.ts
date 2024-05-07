@@ -1,49 +1,32 @@
 import type { NewReservation, Reservation } from "@server/src/schemas";
+import $api from ".";
 const BASE_URL = import.meta.env.VITE_API_URL + "/reservation";
 
 export const getAll = async () => {
-  const res = await fetch(`${BASE_URL}`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}`);
+  return await res.data;
 };
 
 export const getOne = async (id: string) => {
-  const res = await fetch(`${BASE_URL}/${id}`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}/${id}`);
+  return await res.data;
 };
 
 export const deleteOne = async (id: string) => {
-  const res = await fetch(`${BASE_URL}/${id}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify({ id }),
-  });
-  return await res.json();
+  const res = await $api.delete(`${BASE_URL}/${id}`);
+  return await res.data;
 };
 
 export const create = async (data: NewReservation) => {
-  const res = await fetch(`${BASE_URL}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify(data),
-  });
-  return await res.json();
+  const res = await $api.post(`${BASE_URL}`, data);
+  return await res.data;
 };
 
 export const fetchTimeSlots = async (date: string, tableId?: number | null) => {
-  try {
-    const res = await fetch(`${BASE_URL}/get-slots`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tableId, date }),
-    });
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching time slots:", error);
-  }
+  const res = await $api.post(`${BASE_URL}/get-slots`, { tableId, date });
+  return await res.data;
 };
 
 export const getUnassignedReservations = async (): Promise<Reservation[]> => {
-  return await fetch(`${BASE_URL}/not-assigned`).then((res) => res.json());
+  return await $api.get(`${BASE_URL}/not-assigned`).then((res) => res.data);
 };

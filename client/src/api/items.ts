@@ -5,28 +5,21 @@ import { type NewItem } from "@server/src/schemas/item";
 const BASE_URL = import.meta.env.VITE_API_URL + "/item";
 
 export const getAll = async () => {
-  const res = await fetch(`${BASE_URL}`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}`);
+  return await res.data;
 };
 
 export const getOne = async (id: string) => {
-  const res = await fetch(`${BASE_URL}/${id}`);
-  return await res.json();
+  const res = await $api.get(`${BASE_URL}/${id}`);
+  return await res.data;
 };
 export const deleteOne = async (id: string) => {
-  const res = await fetch(`${BASE_URL}/${id}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-  });
-  return await res.json();
+  const res = await $api.delete(`${BASE_URL}/${id}`);
+  return await res.data;
 };
 export const create = async (data: NewItem) => {
-  const res = await fetch(BASE_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify(data),
-  });
-  return await res.json();
+  const res = await $api.post(BASE_URL, data);
+  return await res.data;
 };
 
 type UpdateOrder = {
@@ -34,12 +27,8 @@ type UpdateOrder = {
   data: OrderItem[];
 };
 export const update = async ({ id, data }: UpdateOrder) => {
-  const res = await fetch(`${BASE_URL}/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify(data),
-  });
-  return await res.json();
+  const res = await $api.put(`${BASE_URL}/${id}`, data);
+  return await res.data;
 };
 
 export const getStopItems = async () => {
