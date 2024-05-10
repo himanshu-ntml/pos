@@ -50,7 +50,9 @@ app.use(
 
 app.use(express.json());
 
-app.use(authMiddleware);
+
+
+// app.use(authMiddleware);
 
 app.use("/user", userRouter);
 app.use("/table", tableRouter);

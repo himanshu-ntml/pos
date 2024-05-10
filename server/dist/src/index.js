@@ -44,7 +44,6 @@ const bill_1 = __importDefault(require("./routes/bill"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const payment_1 = __importDefault(require("./routes/payment"));
 const venue_1 = __importDefault(require("./routes/venue"));
-const auth_middleware_1 = __importDefault(require("./middleware/auth-middleware"));
 const errorMiddleware = __importStar(require("./middleware/error-middleware"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 dotenv_1.default.config();
@@ -57,7 +56,7 @@ app.use((0, cors_1.default)({
     credentials: true,
 }));
 app.use(express_1.default.json());
-app.use(auth_middleware_1.default);
+// app.use(authMiddleware);
 app.use("/user", user_1.default);
 app.use("/table", table_1.default);
 app.use("/reservation", reservation_1.default);
