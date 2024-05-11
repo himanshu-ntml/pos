@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL + "/table";
+const BASE_URL = "/table";
 import type { NewTable, TableStatus } from "@server/src/schemas";
 import $api from ".";
 

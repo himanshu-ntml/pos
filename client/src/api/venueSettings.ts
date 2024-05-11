@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL + "/venueSettings";
+const BASE_URL = "/venueSettings";
 import type { NewVenueSettings, VenueSettings } from "@server/src/schemas";
 import $api from ".";
 

@@ -1,6 +1,6 @@
 import $api from ".";
 
-const BASE_URL = import.meta.env.VITE_API_URL + "/category";
+const BASE_URL = "/category";
 
 export const getAll = async () => {
   const res = await $api.get(`${BASE_URL}`);

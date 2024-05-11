@@ -1,6 +1,6 @@
 import type { NewReservation, Reservation } from "@server/src/schemas";
 import $api from ".";
-const BASE_URL = import.meta.env.VITE_API_URL + "/reservation";
+const BASE_URL = "/reservation";
 
 export const getAll = async () => {
   const res = await $api.get(`${BASE_URL}`);

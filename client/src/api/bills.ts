@@ -1,7 +1,7 @@
 import { type NewBill, type Bill } from "@server/src/schemas/bill";
 import $api from ".";
 
-const BASE_URL = import.meta.env.VITE_API_URL + "/bill";
+const BASE_URL = "/bill";
 
 export const getAll = async () => {
   const res = await $api.get(`${BASE_URL}`);

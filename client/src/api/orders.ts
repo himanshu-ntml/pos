@@ -7,7 +7,7 @@ import type {
 } from "@server/src/schemas/order";
 import $api from ".";
 
-const BASE_URL = import.meta.env.VITE_API_URL + "/order";
+const BASE_URL = "/order";
 
 export const getAll = async (status?: OrderStatus[number]) => {
   const url = `${BASE_URL}` + (status ? `?status=${status}` : "");

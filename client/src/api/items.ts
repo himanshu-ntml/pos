@@ -2,7 +2,7 @@ import $api from ".";
 import type { OrderItem } from "@server/src/schemas";
 import { type NewItem } from "@server/src/schemas/item";
 
-const BASE_URL = import.meta.env.VITE_API_URL + "/item";
+const BASE_URL = "/item";
 
 export const getAll = async () => {
   const res = await $api.get(`${BASE_URL}`);
